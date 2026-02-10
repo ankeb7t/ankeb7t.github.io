@@ -17,7 +17,14 @@
             background: transparent; border: none; color: #ff0000; font-family: inherit; 
             font-size: 1.1rem; outline: none; width: 100%; margin-left: 10px; 
         }
-        .response { color: white; margin-top: 10px; display: none; font-weight: bold; animation: glitch 0.3s infinite; }
+        .response { margin-top: 15px; display: none; }
+        /* Linkin stili */
+        .response a { 
+            color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem;
+            border: 1px dashed white; padding: 5px 10px; display: inline-block;
+            animation: glitch 0.3s infinite;
+        }
+        .response a:hover { background: white; color: black; }
         @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
     </style>
 </head>
@@ -27,16 +34,16 @@
         <div class="line"> [!] WARNING: Sanal Hayatıma hosgeldin</div>
         <div class="line"> [>] ENCRYPTING DIRECTORIES... 100%</div>
         <div class="line"> [>] ANKEB7T_CORE_V2.0: ACTIVE</div>
-        <div id="output-list"></div>
         <div class="input-area">
             <span>root@ankeb7t:~#</span>
-            <input type="text" id="cmd" autofocus autocomplete="off">
+            <input type="text" id="cmd" placeholder="selam yaz..." autofocus autocomplete="off">
         </div>
-        <div id="secret-link" class="response">ACCESS GRANTED: T.me/alledfurdie</div>
+        <div id="secret-link" class="response">
+            <a href="https://t.me/allesfurdie" target="_blank">ACCESS GRANTED: T.me/allesfurdie</a>
+        </div>
     </div>
 
     <script>
-        // Matrix Arkplanı
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
@@ -59,7 +66,6 @@
         }
         setInterval(draw, 40);
 
-        // Komut Sistemi
         const input = document.getElementById('cmd');
         const response = document.getElementById('secret-link');
 
@@ -70,9 +76,8 @@
                     response.style.display = 'block';
                 } else {
                     response.style.display = 'none';
-                    alert("Bilinmeyen komut: " + val);
                 }
-                input.value = ''; // Yazıyı temizle
+                input.value = '';
             }
         });
     </script>
