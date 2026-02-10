@@ -11,17 +11,16 @@
 
 body{
   background:black;
-  color:#00ff9c;
+  color:#ff1a1a;
   font-family:'Share Tech Mono', monospace;
   height:100vh;
   overflow:hidden;
 }
 
-/* MATRIX ARKA PLAN */
+/* MATRIX */
 canvas{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  inset:0;
   z-index:-1;
 }
 
@@ -33,9 +32,9 @@ canvas{
 }
 
 .card{
-  background:rgba(0,0,0,0.75);
-  border:1px solid #00ff9c;
-  box-shadow:0 0 40px rgba(0,255,156,0.25);
+  background:rgba(0,0,0,0.8);
+  border:1px solid #ff1a1a;
+  box-shadow:0 0 45px rgba(255,0,0,0.35);
   padding:40px;
   width:420px;
   text-align:center;
@@ -46,7 +45,7 @@ canvas{
   width:140px;
   height:140px;
   border-radius:50%;
-  border:2px solid #00ff9c;
+  border:2px solid #ff1a1a;
   object-fit:cover;
   margin-bottom:20px;
 }
@@ -54,15 +53,15 @@ canvas{
 /* İSİM */
 h1{
   letter-spacing:4px;
-  font-size:2.3rem;
-  margin-bottom:10px;
+  font-size:2.4rem;
 }
 
 /* SLOGAN */
 .tagline{
+  margin-top:12px;
   font-size:0.95rem;
   line-height:1.6;
-  color:#b6ffe6;
+  color:#ffb3b3;
 }
 
 /* LINKLER */
@@ -73,23 +72,30 @@ h1{
 .links a{
   display:block;
   text-decoration:none;
-  color:#00ff9c;
-  border:1px solid #00ff9c;
+  color:#ff1a1a;
+  border:1px solid #ff1a1a;
   padding:12px;
   margin:10px 0;
-  transition:0.25s;
+  transition:.25s;
 }
 
 .links a:hover{
-  background:#00ff9c;
+  background:#ff1a1a;
   color:black;
 }
 
-/* FOOTER */
+/* ALT */
 .footer{
   margin-top:25px;
-  font-size:0.7rem;
-  color:#4dffcc;
+  font-size:0.75rem;
+  color:#ff8080;
+  letter-spacing:2px;
+}
+
+.time{
+  margin-top:8px;
+  font-size:0.75rem;
+  color:#ff4d4d;
 }
 </style>
 </head>
@@ -101,7 +107,8 @@ h1{
 <div class="container">
   <div class="card">
 
-    <img class="avatar" src="https://i.pinimg.com/236x/f1/e6/17/f1e617d910d42be6e9c6eed0e3f359e1.jpg">
+    <img class="avatar"
+    src="https://i.pinimg.com/236x/f1/e6/17/f1e617d910d42be6e9c6eed0e3f359e1.jpg">
 
     <h1>ANKB7T</h1>
 
@@ -116,45 +123,50 @@ h1{
     </div>
 
     <div class="footer">
-      ACCESS GRANTED • DIGITAL IDENTITY • 2026
+      ALLES FÜR DIE • 2026
     </div>
+
+    <div class="time" id="time"></div>
 
   </div>
 </div>
 
 <script>
+// MATRIX
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 const letters = "01";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
-const drops = [];
-
-for(let i=0;i<columns;i++) drops[i]=1;
+const drops = Array(Math.floor(columns)).fill(1);
 
 function draw(){
   ctx.fillStyle="rgba(0,0,0,0.08)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  ctx.fillStyle="#00ff9c";
+  ctx.fillStyle="#ff1a1a";
   ctx.font=fontSize+"px monospace";
 
-  for(let i=0;i<drops.length;i++){
-    const text = letters[Math.floor(Math.random()*letters.length)];
-    ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-    if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
-      drops[i]=0;
-
+  drops.forEach((y,i)=>{
+    const text = letters[Math.floor(Math.random()*2)];
+    ctx.fillText(text,i*fontSize,y*fontSize);
+    if(y*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
     drops[i]++;
-  }
+  });
 }
-
 setInterval(draw,35);
+
+// SAAT & TARİH
+function updateTime(){
+  const now = new Date();
+  document.getElementById("time").innerText =
+    now.toLocaleDateString("tr-TR") + " — " +
+    now.toLocaleTimeString("tr-TR");
+}
+setInterval(updateTime,1000);
+updateTime();
 </script>
 
 </body>
