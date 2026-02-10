@@ -4,111 +4,77 @@
     <meta charset="UTF-8">
     <title>SYSTEM BREACH // ANKEB7T</title>
     <style>
-        body {
-            background-color: #050000; /* Çok koyu kırmızımtırak siyah */
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Share Tech Mono', 'Courier New', monospace;
-        }
-
-        canvas {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            filter: blur(1px); /* Biraz daha gizemli bir hava verir */
-        }
-
+        body { background-color: #050000; margin: 0; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
+        canvas { display: block; position: fixed; top: 0; left: 0; z-index: -1; filter: blur(1px); }
         .terminal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid #ff0000;
-            padding: 30px;
-            background-color: rgba(10, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4), inset 0 0 10px rgba(255, 0, 0, 0.2);
-            width: 85%;
-            max-width: 650px;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border: 1px solid #ff0000; padding: 30px; background-color: rgba(10, 0, 0, 0.9);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); width: 85%; max-width: 650px;
         }
-
-        .line {
-            color: #ff0000; /* Kan kırmızısı */
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-            text-shadow: 0 0 5px #ff0000;
+        .line { color: #ff0000; margin-bottom: 12px; font-size: 1.1rem; text-shadow: 0 0 5px #ff0000; }
+        .input-area { display: flex; color: #ff0000; margin-top: 20px; align-items: center; }
+        input { 
+            background: transparent; border: none; color: #ff0000; font-family: inherit; 
+            font-size: 1.1rem; outline: none; width: 100%; margin-left: 10px; 
         }
-
-        /* Yazı yazma alanı gibi görünen kısım */
-        .input-area {
-            display: flex;
-            color: #ff0000;
-            margin-top: 20px;
-        }
-
-        .cursor {
-            width: 10px;
-            height: 20px;
-            background-color: #ff0000;
-            margin-left: 5px;
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
+        .response { color: white; margin-top: 10px; display: none; font-weight: bold; animation: glitch 0.3s infinite; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
     </style>
 </head>
 <body>
-
     <canvas id="matrix"></canvas>
-
     <div class="terminal">
         <div class="line"> [!] WARNING: Sanal Hayatıma hosgeldin</div>
         <div class="line"> [>] ENCRYPTING DIRECTORIES... 100%</div>
         <div class="line"> [>] ANKEB7T_CORE_V2.0: ACTIVE</div>
-        <div class="line" style="color: white;"> > System is under your control.</div>
-        
+        <div id="output-list"></div>
         <div class="input-area">
-            <span>root@ankeb7t:~# komut yaz ve Enter'a bas...</span>
-            <div class="cursor"></div>
+            <span>root@ankeb7t:~#</span>
+            <input type="text" id="cmd" autofocus autocomplete="off">
         </div>
+        <div id="secret-link" class="response">ACCESS GRANTED: T.me/alledfurdie</div>
     </div>
 
     <script>
+        // Matrix Arkplanı
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
-
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-
-        // Kırmızı tema için Japonca karakterler ve sayılar karışık
-        const letters = "日ハミヒーパピプペポ0123456789X-Y-Z-BREACH";
+        canvas.height = window.innerHeight; canvas.width = window.innerWidth;
+        const letters = "日ハミヒー0123456789X-Y-Z-BREACH";
         const fontSize = 18;
         const columns = canvas.width / fontSize;
         const drops = [];
-
         for (let i = 0; i < columns; i++) drops[i] = 1;
 
         function draw() {
-            ctx.fillStyle = "rgba(5, 0, 0, 0.1)"; // İz bırakma efekti
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = "#660000"; // Akan yazıların ana rengi (koyu kırmızı)
+            ctx.fillStyle = "rgba(5, 0, 0, 0.1)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.font = fontSize + "px monospace";
-
             for (let i = 0; i < drops.length; i++) {
                 const text = letters[Math.floor(Math.random() * letters.length)];
-                
-                // Arada bazı karakterleri parlak kırmızı yapalım ki gerçekçi olsun
-                if(Math.random() > 0.95) ctx.fillStyle = "#ff0000";
-                else ctx.fillStyle = "#660000";
-
+                ctx.fillStyle = Math.random() > 0.95 ? "#ff0000" : "#660000";
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
         setInterval(draw, 40);
+
+        // Komut Sistemi
+        const input = document.getElementById('cmd');
+        const response = document.getElementById('secret-link');
+
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const val = input.value.toLowerCase().trim();
+                if (val === 'selam') {
+                    response.style.display = 'block';
+                } else {
+                    response.style.display = 'none';
+                    alert("Bilinmeyen komut: " + val);
+                }
+                input.value = ''; // Yazıyı temizle
+            }
+        });
     </script>
 </body>
 </html>
