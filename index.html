@@ -2,47 +2,83 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Ankeb7t | Sistem</title>
+    <title>ANKXPOLON // WATCHER MODE</title>
     <style>
-        /* Burası sitenin stil (CSS) kısmıdır */
         body {
-            background-color: #0a0a0a; /* Siyah arka plan */
-            color: #00FF41; /* Hacker yeşili yazı */
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: black;
             margin: 0;
+            overflow: hidden; /* Ekranın kaymasını engeller */
+            font-family: 'Courier New', monospace;
         }
+
+        /* Arka plandaki akan yazılar için */
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Yazıları kutunun arkasına atar */
+        }
+
+        /* Ortadaki o havalı mesaj kutusu */
         .terminal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border: 2px solid #00FF41;
             padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Arkayı hafif gösterir */
+            box-shadow: 0 0 20px #00FF41;
             width: 80%;
             max-width: 600px;
-            box-shadow: 0 0 15px #00FF41;
         }
+
         .line {
+            color: #00FF41;
             margin-bottom: 10px;
-            border-right: 2px solid #00FF41;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+            font-weight: bold;
         }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #00FF41 } }
     </style>
 </head>
 <body>
 
+    <canvas id="matrix"></canvas>
+
     <div class="terminal">
         <div class="line">> Initializing ANKEB7T core...</div>
-        <div class="line">> System status: ONLINE</div>
-        <div class="line">> Welcome to my world.</div>
-        <br>
-        <p style="color: white;">[ Komut bekleniyor... ]</p>
+        <div class="line">> Watcher linked.</div>
+        <div class="line">> Dünyama hosgeldin.</div>
     </div>
 
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) drops[i] = 1;
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0"; 
+            ctx.font = fontSize + "px arial";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+    </script>
 </body>
 </html>
-
