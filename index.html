@@ -2,52 +2,58 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>ANKEB7T | Sanal Hayatım</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANKB7T // DIGITAL IDENTITY</title>
     <style>
-        body { background-color: #050000; margin: 0; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
+        body { background-color: #050000; margin: 0; overflow: hidden; font-family: 'Share Tech Mono', monospace; color: #fff; }
         canvas { display: block; position: fixed; top: 0; left: 0; z-index: -1; filter: blur(1px); }
-        .terminal {
+
+        .container {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            border: 1px solid #ff0000; padding: 30px; background-color: rgba(10, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); width: 90%; max-width: 500px;
+            width: 90%; max-width: 450px; background: rgba(10, 0, 0, 0.95);
+            border: 1px solid #ff0000; box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
+            padding: 40px; text-align: center;
         }
-        .header { color: #ff0000; font-size: 1.8rem; margin-bottom: 5px; text-shadow: 0 0 10px #ff0000; text-align: center; font-weight: bold; }
-        .subheader { color: #ff0000; font-size: 0.9rem; text-align: center; margin-bottom: 20px; letter-spacing: 3px; border-bottom: 1px solid #440000; padding-bottom: 15px; opacity: 0.8; }
-        .info-section { color: #ffffff; line-height: 1.6; margin-bottom: 25px; text-align: center; font-size: 1rem; }
-        .welcome-msg { color: #ff0000; font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
-        .social-box { display: flex; flex-direction: column; gap: 12px; }
-        .social-link { 
-            color: white; text-decoration: none; font-weight: bold; font-size: 1rem;
-            border: 1px solid #ff0000; padding: 12px; background: rgba(255, 0, 0, 0.1);
-            transition: 0.3s; text-align: center; letter-spacing: 1px;
+
+        .profile-img {
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 2px solid #ff0000; margin-bottom: 20px;
+            object-fit: cover; box-shadow: 0 0 15px #ff0000;
         }
-        .group-link { background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; }
-        .social-link:hover { background: #ff0000; color: black; box-shadow: 0 0 20px #ff0000; transform: scale(1.02); }
-        .footer { color: #770000; font-size: 0.9rem; margin-top: 25px; text-align: center; font-weight: bold; letter-spacing: 4px; }
+
+        .name { font-size: 2rem; font-weight: bold; letter-spacing: 2px; color: #ff0000; margin: 10px 0; }
+        .title { font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px; }
+
+        .links { display: flex; flex-direction: column; gap: 15px; }
+        .link-btn {
+            text-decoration: none; color: #fff; font-weight: bold; font-size: 0.9rem;
+            border: 1px solid #ff0000; padding: 15px; background: rgba(255, 0, 0, 0.05);
+            transition: all 0.3s ease; letter-spacing: 1px;
+        }
+
+        .link-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+
+        .footer { margin-top: 30px; font-size: 0.7rem; color: #444; letter-spacing: 2px; }
     </style>
 </head>
 <body>
+
     <canvas id="matrix"></canvas>
-    <div class="terminal">
-        <div class="header"> SANAL HAYATIM </div>
-        <div class="subheader"> @ankeb7t </div>
+
+    <div class="container">
+        <img src="FOTOĞRAF_LİNKİ_BURAYA" alt="ANKB7T" class="profile-img" onerror="this.style.display='none'">
         
-        <div class="info-section">
-            <span class="welcome-msg">Dünyama Hoş Geldiniz.</span>
-            Gerçekliğin bittiği, kodların ve gölgelerin başladığı yerdesiniz. 
-            Burada kurallar farklı işler; sadece iz bırakanlar ve iz sürenler vardır. 
-            Sanal dünyanın derinliklerinde kendime ait bir yol çizdim. 
+        <div class="name">ANKB7T</div>
+        <div class="title">Cyber Operator / Digital Identity</div>
+
+        <div class="links">
+            <a href="https://t.me/c4ksiber" class="link-btn" target="_blank">C4K SIBER GRUP</a>
+            <a href="https://t.me/allesfurdie" class="link-btn" target="_blank">TELEGRAM (PERSONAL)</a>
+            <a href="https://wa.me/998998780248" class="link-btn" target="_blank">WHATSAPP</a>
+            <a href="https://instagram.com/hissedilme" class="link-btn" target="_blank">INSTAGRAM</a>
         </div>
 
-        <div class="social-box">
-            <a href="https://t.me/c4ksiber" class="social-link group-link" target="_blank">📍 RESMİ GRUBUMUZ (@c4ksiber)</a>
-            
-            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">TELEGRAM (@allesfurdie)</a>
-            <a href="https://wa.me/99998780248" class="social-link" target="_blank">WHATSAPP HESABIM</a>
-            <a href="https://ig.me/m/hissedilme" class="social-link" target="_blank">INSTAGRAM (@hissedilme)</a>
-        </div>
-
-        <div class="footer">ALLES FUR DIE</div>
+        <div class="footer">ENCRYPTED CONNECTION ESTABLISHED // 2026</div>
     </div>
 
     <script>
@@ -57,98 +63,20 @@
         const letters = "01";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let i = 0; i < columns; i++) drops[i] = 1;
+        const drops = Array(Math.floor(columns)).fill(1);
 
         function draw() {
             ctx.fillStyle = "rgba(5, 0, 0, 0.1)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
                 const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillStyle = Math.random() > 0.95 ? "#ff0000" : "#300000";
+                ctx.fillStyle = Math.random() > 0.98 ? "#fff" : "#400";
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(draw, 40);
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <title>ANKEB7T | Sanal Hayatım</title>
-    <style>
-        body { background-color: #050000; margin: 0; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
-        canvas { display: block; position: fixed; top: 0; left: 0; z-index: -1; filter: blur(1px); }
-        .terminal {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            border: 1px solid #ff0000; padding: 30px; background-color: rgba(10, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); width: 90%; max-width: 500px;
-        }
-        .header { color: #ff0000; font-size: 1.8rem; margin-bottom: 5px; text-shadow: 0 0 10px #ff0000; text-align: center; font-weight: bold; }
-        .subheader { color: #ff0000; font-size: 0.9rem; text-align: center; margin-bottom: 20px; letter-spacing: 3px; border-bottom: 1px solid #440000; padding-bottom: 15px; opacity: 0.8; }
-        .info-section { color: #ffffff; line-height: 1.6; margin-bottom: 25px; text-align: center; font-size: 1rem; }
-        .welcome-msg { color: #ff0000; font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
-        .social-box { display: flex; flex-direction: column; gap: 12px; }
-        .social-link { 
-            color: white; text-decoration: none; font-weight: bold; font-size: 1rem;
-            border: 1px solid #ff0000; padding: 12px; background: rgba(255, 0, 0, 0.1);
-            transition: 0.3s; text-align: center; letter-spacing: 1px;
-        }
-        .group-link { background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; }
-        .social-link:hover { background: #ff0000; color: black; box-shadow: 0 0 20px #ff0000; transform: scale(1.02); }
-        .footer { color: #770000; font-size: 0.9rem; margin-top: 25px; text-align: center; font-weight: bold; letter-spacing: 4px; }
-    </style>
-</head>
-<body>
-    <canvas id="matrix"></canvas>
-    <div class="terminal">
-        <div class="header"> SANAL HAYATIM </div>
-        <div class="subheader"> @ankeb7t </div>
-        
-        <div class="info-section">
-            <span class="welcome-msg">Dünyama Hoş Geldiniz.</span>
-            Gerçekliğin bittiği, kodların ve gölgelerin başladığı yerdesiniz. 
-            Burada kurallar farklı işler; sadece iz bırakanlar ve iz sürenler vardır. 
-            Sanal dünyanın derinliklerinde kendime ait bir yol çizdim. 
-        </div>
-
-        <div class="social-box">
-            <a href="https://t.me/c4ksiber" class="social-link group-link" target="_blank">📍 RESMİ GRUBUMUZ (@c4ksiber)</a>
-            
-            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">TELEGRAM (@allesfurdie)</a>
-            <a href="https://wa.me/998998780248" class="social-link" target="_blank">WHATSAPP HESABIM</a>
-            <a href="https://ig.me/m/hissedilme" class="social-link" target="_blank">INSTAGRAM (@hissedilme)</a>
-        </div>
-
-        <div class="footer">ALLES FUR DIE</div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.height = window.innerHeight; canvas.width = window.innerWidth;
-        const letters = "01";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let i = 0; i < columns; i++) drops[i] = 1;
-
-        function draw() {
-            ctx.fillStyle = "rgba(5, 0, 0, 0.1)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillStyle = Math.random() > 0.95 ? "#ff0000" : "#300000";
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 40);
+        setInterval(draw, 50);
     </script>
 </body>
 </html>
