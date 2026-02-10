@@ -2,56 +2,53 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>TERMINAL // ANKEB7T</title>
+    <title>ANKEB7T</title>
     <style>
         body { background-color: #050000; margin: 0; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
         canvas { display: block; position: fixed; top: 0; left: 0; z-index: -1; filter: blur(1px); }
         .terminal {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             border: 1px solid #ff0000; padding: 30px; background-color: rgba(10, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); width: 90%; max-width: 600px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); width: 90%; max-width: 500px;
         }
-        .header { color: #ff0000; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid #ff0000; padding-bottom: 10px; text-shadow: 0 0 5px #ff0000; }
-        .info-section { color: white; line-height: 1.6; margin-bottom: 25px; }
+        .header { color: #ff0000; font-size: 1.5rem; margin-bottom: 20px; border-bottom: 1px solid #ff0000; padding-bottom: 10px; text-shadow: 0 0 5px #ff0000; text-align: center; font-weight: bold;}
+        .info-section { color: white; line-height: 1.6; margin-bottom: 25px; text-align: center; font-size: 1.1rem;}
         .highlight { color: #ff0000; font-weight: bold; }
-        .social-box { display: flex; flex-direction: column; gap: 10px; }
+        .social-box { display: flex; flex-direction: column; gap: 12px; }
         .social-link { 
             color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem;
-            border: 1px solid #ff0000; padding: 10px; background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000; padding: 12px; background: rgba(255, 0, 0, 0.1);
             transition: 0.3s; text-align: center;
         }
-        .social-link:hover { background: #ff0000; color: black; box-shadow: 0 0 15px #ff0000; }
-        .footer { color: #550000; font-size: 0.8rem; margin-top: 20px; text-align: center; }
+        .social-link:hover { background: #ff0000; color: black; box-shadow: 0 0 20px #ff0000; transform: scale(1.02); }
+        .footer { color: #770000; font-size: 0.9rem; margin-top: 25px; text-align: center; font-weight: bold; }
     </style>
 </head>
 <body>
     <canvas id="matrix"></canvas>
     <div class="terminal">
-        <div class="header"> [!] SISTEM ANALIZI: ANKEB7T_ACCESS_GRANTED</div>
+        <div class="header"> ANKEB7T </div>
         
         <div class="info-section">
-            <span class="highlight">>> HAKKIMDA:</span><br>
-            Sanal dünyada iz bırakmayan, kodların arasında yaşayan biriyim. 
-            Teknoloji benim için sadece bir araç değil, bir yaşam biçimi. 
-            Sınırları zorlamayı ve dijital evrenin derinliklerinde keşif yapmayı seviyorum.
+            Bana ulaşmak için aşağıdaki adresleri kullanabilirsin. <br>
+            <span class="highlight">Telegram</span> üzerinden her zaman aktifim.
         </div>
 
         <div class="social-box">
-            <span class="highlight">>> ILETISIM KANALLARI:</span>
-            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">TELEGRAM: @allesfurdie</a>
-            <a href="https://instagram.com/hissedilme" class="social-link" target="_blank">INSTAGRAM: @hissedilme</a>
-            <a href="tel:+99998780248" class="social-link">TELEFON: +999 987 80 248</a>
+            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">TELEGRAM (@allesfurdie)</a>
+            <a href="https://wa.me/99998780248" class="social-link" target="_blank">WHATSAPP</a>
+            <a href="https://ig.me/m/hissedilme" class="social-link" target="_blank">INSTAGRAM (@hissedilme)</a>
         </div>
 
-        <div class="footer">STAY SAFE // ENCRYPTED CONNECTION</div>
+        <div class="footer">ALLES FUR DIE</div>
     </div>
 
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
-        const letters = "日ハミヒー0123456789X-Y-Z-BREACH";
-        const fontSize = 18;
+        const letters = "01";
+        const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = [];
         for (let i = 0; i < columns; i++) drops[i] = 1;
@@ -61,7 +58,7 @@
             ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
                 const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillStyle = Math.random() > 0.95 ? "#ff0000" : "#440000";
+                ctx.fillStyle = Math.random() > 0.95 ? "#ff0000" : "#300000";
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
