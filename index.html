@@ -2,43 +2,60 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>ANKXPOLON // WATCHER MODE</title>
+    <title>SYSTEM BREACH // ANKEB7T</title>
     <style>
         body {
-            background-color: black;
+            background-color: #050000; /* Çok koyu kırmızımtırak siyah */
             margin: 0;
-            overflow: hidden; /* Ekranın kaymasını engeller */
-            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
         }
 
-        /* Arka plandaki akan yazılar için */
         canvas {
             display: block;
             position: fixed;
             top: 0;
             left: 0;
-            z-index: -1; /* Yazıları kutunun arkasına atar */
+            z-index: -1;
+            filter: blur(1px); /* Biraz daha gizemli bir hava verir */
         }
 
-        /* Ortadaki o havalı mesaj kutusu */
         .terminal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 2px solid #00FF41;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8); /* Arkayı hafif gösterir */
-            box-shadow: 0 0 20px #00FF41;
-            width: 80%;
-            max-width: 600px;
+            border: 1px solid #ff0000;
+            padding: 30px;
+            background-color: rgba(10, 0, 0, 0.9);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4), inset 0 0 10px rgba(255, 0, 0, 0.2);
+            width: 85%;
+            max-width: 650px;
         }
 
         .line {
-            color: #00FF41;
-            margin-bottom: 10px;
-            font-weight: bold;
+            color: #ff0000; /* Kan kırmızısı */
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px #ff0000;
         }
+
+        /* Yazı yazma alanı gibi görünen kısım */
+        .input-area {
+            display: flex;
+            color: #ff0000;
+            margin-top: 20px;
+        }
+
+        .cursor {
+            width: 10px;
+            height: 20px;
+            background-color: #ff0000;
+            margin-left: 5px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -46,9 +63,15 @@
     <canvas id="matrix"></canvas>
 
     <div class="terminal">
-        <div class="line">> ANKEB7T core...</div>
-        <div class="line">> https://t.me/allesfurdie</div>
-        <div class="line">> Sanal mabedime hosgeldin.</div>
+        <div class="line"> [!] WARNING: Sanal Hayatıma hosgeldin</div>
+        <div class="line"> [>] ENCRYPTING DIRECTORIES... 100%</div>
+        <div class="line"> [>] ANKEB7T_CORE_V2.0: ACTIVE</div>
+        <div class="line" style="color: white;"> > System is under your control.</div>
+        
+        <div class="input-area">
+            <span>root@ankeb7t:~# komut yaz ve Enter'a bas...</span>
+            <div class="cursor"></div>
+        </div>
     </div>
 
     <script>
@@ -58,27 +81,34 @@
         canvas.height = window.innerHeight;
         canvas.width = window.innerWidth;
 
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
-        const fontSize = 16;
+        // Kırmızı tema için Japonca karakterler ve sayılar karışık
+        const letters = "日ハミヒーパピプペポ0123456789X-Y-Z-BREACH";
+        const fontSize = 18;
         const columns = canvas.width / fontSize;
         const drops = [];
 
         for (let i = 0; i < columns; i++) drops[i] = 1;
 
         function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillStyle = "rgba(5, 0, 0, 0.1)"; // İz bırakma efekti
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0"; 
-            ctx.font = fontSize + "px arial";
+            
+            ctx.fillStyle = "#660000"; // Akan yazıların ana rengi (koyu kırmızı)
+            ctx.font = fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
                 const text = letters[Math.floor(Math.random() * letters.length)];
+                
+                // Arada bazı karakterleri parlak kırmızı yapalım ki gerçekçi olsun
+                if(Math.random() > 0.95) ctx.fillStyle = "#ff0000";
+                else ctx.fillStyle = "#660000";
+
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(draw, 33);
+        setInterval(draw, 40);
     </script>
 </body>
 </html>
