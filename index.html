@@ -2,153 +2,170 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>ANKB7T // UNKNOWN</title>
+<title>Hacker Surveillance Network</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%}
 body{
-  font-family:'JetBrains Mono', monospace;
   background:black;
   color:#e0e0e0;
-  overflow:hidden;
+  font-family:'JetBrains Mono',monospace;
+  overflow-x:hidden;
 }
 
-/* BACKGROUND IMAGE */
-.bg{
-  position:fixed;
-  inset:0;
-  background:url('https://i.pinimg.com/236x/f1/e6/17/f1e617d910d42be6e9c6eed0e3f359e1.jpg') center/cover no-repeat;
-  filter:blur(8px) brightness(0.35);
-  transform:scale(1.1);
-  animation:slowMove 20s infinite alternate ease-in-out;
-  z-index:-3;
-}
-@keyframes slowMove{
-  from{transform:scale(1.1) translateY(0)}
-  to{transform:scale(1.15) translateY(-20px)}
-}
-
-/* DARK OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  z-index:-2;
-}
-
-/* NOISE */
-.noise{
-  position:fixed;
-  inset:0;
-  background:url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity:0.08;
-  z-index:-1;
-}
-
-/* MAIN */
-.center{
-  height:100%;
+/* HERO */
+.hero{
+  height:70vh;
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
   text-align:center;
-  padding:20px;
 }
-
-h1{
+.hero h1{
   font-family:'Orbitron';
+  font-size:3rem;
   color:#ff1a1a;
   letter-spacing:4px;
-  font-size:2.5rem;
 }
-
-.sub{
+.hero p{
   margin-top:10px;
-  font-size:.9rem;
   color:#aaa;
-  letter-spacing:2px;
+  font-size:1.1rem;
 }
 
-.quote{
-  margin-top:25px;
-  font-size:1rem;
-  color:#888;
-  line-height:1.6;
-  letter-spacing:1px;
+/* CAMERA GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  padding:30px;
 }
 
-/* HUD TEXT */
-.hud{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  font-size:.7rem;
-  color:#555;
+/* CAMERA CARD */
+.cam{
+  position:relative;
+  background:#111;
+  border:1px solid #330000;
+  padding:10px;
+  height:180px;
+  overflow:hidden;
 }
-.hud span{color:#ff1a1a}
 
-/* LINKS */
-.links{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  text-align:right;
+.cam .screen{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  animation:static 0.7s infinite;
 }
-.links a{
-  display:block;
+
+@keyframes static{
+  0%{opacity:0.8}
+  50%{opacity:0.95}
+  100%{opacity:0.85}
+}
+
+.cam .ui{
+  position:absolute;
+  top:8px;left:8px;
+  font-size:.65rem;
+  color:#ff1a1a;
+  line-height:1rem;
+  text-shadow:0 0 3px black;
+}
+
+.cam .noise{
+  position:absolute;
+  inset:0;
+  background:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:0.08;
+}
+
+.cam .label{
+  position:absolute;
+  bottom:8px; right:8px;
+  font-size:.8rem;
   color:#777;
-  text-decoration:none;
-  font-size:.75rem;
-  margin-top:6px;
+  text-shadow:0 0 4px black;
 }
-.links a:hover{color:#ff1a1a}
 
-/* GLITCH */
-.glitch{
-  animation:glitch 2.5s infinite;
+/* SCROLL APPEAR */
+.cam{
+  opacity:0;
+  transform:translateY(30px);
+  transition:.6s ease-out;
 }
-@keyframes glitch{
-  0%{text-shadow:none}
-  20%{text-shadow:2px 0 red}
-  40%{text-shadow:-2px 0 #ff1a1a}
-  60%{text-shadow:1px 0 red}
-  100%{text-shadow:none}
+.cam.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  color:#555;
+  font-size:.7rem;
+  margin:20px 0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="overlay"></div>
-<div class="noise"></div>
+<div class="hero">
+  <h1>SURVEILLANCE NETWORK</h1>
+  <p>Simulated camera grid — no real footage</p>
+</div>
 
-<div class="center">
-  <div>
-    <h1 class="glitch">ANKB7T</h1>
-    <div class="sub">IDENTITY: UNKNOWN</div>
+<div class="grid">
 
-    <div class="quote">
-      Görünmeyen şeyleri kontrol edenler,<br>
-      görünen dünyayı yönetir.
-    </div>
+  <div class="cam" id="cam1">
+    <div class="screen"></div>
+    <div class="noise"></div>
+    <div class="ui">REC ● CAMERA_01<br>SIGNAL: STRONG</div>
+    <div class="label">CAMERA_01</div>
   </div>
+
+  <div class="cam" id="cam2">
+    <div class="screen"></div>
+    <div class="noise"></div>
+    <div class="ui">REC ● CAMERA_02<br>SIGNAL: UNSTABLE</div>
+    <div class="label">CAMERA_02</div>
+  </div>
+
+  <div class="cam" id="cam3">
+    <div class="screen"></div>
+    <div class="noise"></div>
+    <div class="ui">REC ● CAMERA_03<br>SIGNAL: WEAK</div>
+    <div class="label">CAMERA_03</div>
+  </div>
+
+  <div class="cam" id="cam4">
+    <div class="screen"></div>
+    <div class="noise"></div>
+    <div class="ui">OFFLINE ● CAMERA_04<br>SIGNAL: LOST</div>
+    <div class="label">CAMERA_04</div>
+  </div>
+
 </div>
 
-<div class="hud">
-  REC ● CAM_07<br>
-  SIGNAL: <span>UNSTABLE</span><br>
-  ACCESS: <span>LEVEL 7</span>
-</div>
+<footer>SIMULATED SURVEILLANCE INTERFACE — hacker vibes</footer>
 
-<div class="links">
-  <a href="https://t.me/c4ksiber" target="_blank">t.me/c4ksiber</a>
-  <a href="https://t.me/allesfurdie" target="_blank">@allesfurdie</a>
-  <a href="https://instagram.com/hissedilme" target="_blank">@hissedilme</a>
-</div>
+<script>
+// Reveal on scroll
+const cams = document.querySelectorAll('.cam');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{
+  threshold:0.25
+});
+
+cams.forEach(c => observer.observe(c));
+</script>
 
 </body>
 </html>
