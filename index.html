@@ -6,12 +6,7 @@
 <title>ANKB7T CORE</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: monospace;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:monospace;}
 
 body{
     background:#000;
@@ -19,7 +14,6 @@ body{
     overflow-x:hidden;
 }
 
-/* MATRIX BACKGROUND */
 canvas{
     position:fixed;
     top:0;
@@ -27,18 +21,23 @@ canvas{
     z-index:-1;
 }
 
-/* MAIN WRAPPER */
-.wrapper{
-    padding:60px 8%;
+.top-date{
+    position:fixed;
+    top:20px;
+    right:30px;
+    font-size:14px;
+    opacity:0.8;
 }
 
-/* ID CARD */
+.wrapper{
+    padding:100px 8%;
+}
+
 .id-card{
-    border:1px solid #ff0000;
+    border:1px solid red;
     padding:40px;
     margin-bottom:80px;
-    backdrop-filter: blur(6px);
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.7);
     box-shadow:0 0 20px rgba(255,0,0,0.3);
 }
 
@@ -48,18 +47,8 @@ canvas{
     letter-spacing:2px;
 }
 
-.id-info p{
-    margin:8px 0;
-}
+.id-info p{margin:6px 0;}
 
-/* LIVE CLOCK */
-.clock{
-    margin-top:15px;
-    font-size:14px;
-    opacity:0.8;
-}
-
-/* MODULE GRID */
 .modules{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -72,7 +61,7 @@ canvas{
     text-decoration:none;
     color:red;
     transition:0.3s;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.7);
 }
 
 .module:hover{
@@ -82,19 +71,22 @@ canvas{
     transform:scale(1.05);
 }
 
-/* TERMINAL */
 .terminal{
     margin-top:80px;
     border:1px solid red;
     padding:25px;
     font-size:14px;
     line-height:22px;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.7);
 }
 
-.blink{
-    animation:blink 1s infinite;
+.fake-ip{
+    margin-top:40px;
+    font-size:13px;
+    opacity:0.7;
 }
+
+.blink{animation:blink 1s infinite;}
 
 @keyframes blink{
     0%{opacity:0}
@@ -106,6 +98,7 @@ canvas{
 <body>
 
 <canvas id="matrix"></canvas>
+<div class="top-date" id="date"></div>
 
 <div class="wrapper">
 
@@ -116,16 +109,14 @@ canvas{
             <p>ROLE: SYSTEM OPERATOR</p>
             <p>ACCESS: ROOT</p>
             <p>STATUS: ONLINE</p>
-            <p>LOCATION: TURKEY</p>
         </div>
-        <div class="clock" id="clock"></div>
     </div>
 
     <div class="modules">
-        <a href="https://t.me/allesfurdie" class="module">[01] TELEGRAM CHANNEL</a>
-        <a href="https://instagram.com/hissedilme" class="module">[02] INSTAGRAM PROFILE</a>
-        <a href="#" class="module">[03] DARK ARCHIVE</a>
-        <a href="#" class="module">[04] NETWORK GRID</a>
+        <a href="https://t.me/allesfurdie" target="_blank" class="module">[01] TELEGRAM</a>
+        <a href="https://instagram.com/hissedilme" target="_blank" class="module">[02] INSTAGRAM</a>
+        <a href="https://www.turkhackteam.org/" target="_blank" class="module">[03] DARK ARCHIVE</a>
+        <a href="https://darkwebdaily.live/" target="_blank" class="module">[04] DARK WEB DAILY</a>
         <a href="#" class="module">[05] COMMAND CONSOLE</a>
         <a href="#" class="module">[06] ACCESS TERMINAL</a>
     </div>
@@ -133,57 +124,58 @@ canvas{
     <div class="terminal">
         <p>> initializing core...</p>
         <p>> scanning network...</p>
-        <p>> intrusion detection active...</p>
-        <p>> firewall bypassed...</p>
+        <p>> bypassing firewall...</p>
         <p>> root access granted<span class="blink">_</span></p>
     </div>
+
+    <div class="fake-ip" id="fakeip"></div>
 
 </div>
 
 <script>
-/* MATRIX */
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize=14;
+const columns=canvas.width/fontSize;
+const drops=[];
 
-const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for(let x=0; x<columns; x++)
-    drops[x] = 1;
+for(let x=0;x<columns;x++) drops[x]=1;
 
 function draw(){
     ctx.fillStyle="rgba(0,0,0,0.05)";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-
     ctx.fillStyle="#ff0000";
     ctx.font=fontSize+"px monospace";
-
-    for(let i=0; i<drops.length; i++){
-        const text = letters[Math.floor(Math.random()*letters.length)];
-        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-
+    for(let i=0;i<drops.length;i++){
+        const text=letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
         if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
             drops[i]=0;
-
         drops[i]++;
     }
 }
-
 setInterval(draw,35);
 
-/* CLOCK */
-function updateClock(){
-    const now = new Date();
-    document.getElementById("clock").innerHTML =
-        "SYSTEM TIME: " + now.toLocaleString();
+function updateDate(){
+    const now=new Date();
+    document.getElementById("date").innerHTML=now.toLocaleString();
 }
-setInterval(updateClock,1000);
-updateClock();
+setInterval(updateDate,1000);
+updateDate();
+
+function randomIP(){
+    return Math.floor(Math.random()*255)+"."+
+           Math.floor(Math.random()*255)+"."+
+           Math.floor(Math.random()*255)+"."+
+           Math.floor(Math.random()*255);
+}
+
+document.getElementById("fakeip").innerHTML=
+"> connection trace detected<br>IP: "+randomIP()+"<br>Status: Monitoring...";
 </script>
 
 </body>
