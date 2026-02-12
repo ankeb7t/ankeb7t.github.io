@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ankeb7t | Identity Card</title>
+    <title>Ankeb7t | Digital ID</title>
     <style>
         :root {
             --primary-red: #ff0000;
-            --dark-red: #660000;
+            --dark-red: #440000;
             --bg-black: #050505;
         }
 
@@ -23,104 +23,112 @@
             align-items: center;
         }
 
-        /* Arka Planda Kayan Yazı Şeridi */
+        /* Saat ve Tarih (Sağ Üst) */
+        #top-right-clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            font-size: 14px;
+            letter-spacing: 2px;
+            z-index: 20;
+            text-shadow: 0 0 5px var(--primary-red);
+        }
+
+        /* Kayan Yazı Şeritleri */
         .scrolling-wrapper {
             position: fixed;
-            top: 20%; /* Yazının geçeceği yükseklik */
             width: 100%;
             white-space: nowrap;
             overflow: hidden;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.2;
             pointer-events: none;
         }
 
+        .upper { top: 15%; }
+        .lower { bottom: 15%; }
+
         .scrolling-text {
             display: inline-block;
-            font-size: 80px;
+            font-size: 60px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 20px;
-            animation: scroll-left 15s linear infinite;
+            letter-spacing: 15px;
         }
+
+        .to-left { animation: scroll-left 20s linear infinite; }
+        .to-right { animation: scroll-right 20s linear infinite; }
 
         @keyframes scroll-left {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
         }
 
-        /* Matrix Canvas */
-        #canvas {
-            position: fixed; top: 0; left: 0;
-            z-index: 0; opacity: 0.1;
+        @keyframes scroll-right {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
         }
+
+        /* Matrix Canvas */
+        #canvas { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.1; }
 
         /* Giriş Ekranı */
-        #intro-screen {
-            position: absolute; z-index: 100; text-align: center;
-        }
-
+        #intro-screen { position: absolute; z-index: 100; }
         .open-btn {
-            background: transparent;
-            color: var(--primary-red);
-            border: 2px solid var(--primary-red);
-            padding: 20px 50px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--dark-red);
-            transition: 0.3s;
+            background: transparent; color: var(--primary-red);
+            border: 2px solid var(--primary-red); padding: 20px 50px;
+            font-size: 24px; cursor: pointer;
+            box-shadow: 0 0 15px var(--dark-red); transition: 0.3s;
         }
-
         .open-btn:hover { background: var(--primary-red); color: black; }
 
         /* Ana Panel */
         #main-panel {
-            display: none;
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            max-width: 550px;
-            border: 1px solid var(--primary-red);
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+            display: none; position: relative; z-index: 10;
+            width: 90%; max-width: 500px;
+            border: 1px solid var(--primary-red); padding: 35px;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
         }
 
         .card-header {
-            text-align: center;
-            border-bottom: 1px solid var(--primary-red);
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            font-size: 20px;
-            letter-spacing: 5px;
+            text-align: center; border-bottom: 1px solid var(--primary-red);
+            margin-bottom: 20px; padding-bottom: 15px;
+            font-size: 18px; letter-spacing: 4px;
         }
 
-        .info-section { margin-bottom: 30px; }
-        .info-row { display: flex; margin-bottom: 8px; font-size: 16px; }
-        .label { width: 120px; color: #555; font-weight: bold; }
+        .info-section { margin-bottom: 25px; }
+        .info-row { display: flex; margin-bottom: 6px; font-size: 14px; }
+        .label { width: 110px; color: #666; }
 
-        .button-grid { display: grid; gap: 15px; }
-
+        .button-grid { display: grid; gap: 12px; }
         .social-link {
-            border: 1px solid var(--primary-red);
-            padding: 15px;
-            text-decoration: none;
-            color: var(--primary-red);
-            display: flex;
-            transition: 0.3s;
+            border: 1px solid var(--primary-red); padding: 12px;
+            text-decoration: none; color: var(--primary-red);
+            display: flex; transition: 0.3s; font-size: 14px;
         }
-
         .social-link:hover { background: var(--primary-red); color: black; }
-        .num { margin-right: 15px; opacity: 0.7; }
 
+        /* Alt Yazı */
+        .footer-text {
+            text-align: center; margin-top: 25px;
+            font-size: 12px; letter-spacing: 8px;
+            text-transform: uppercase; opacity: 0.6;
+        }
     </style>
 </head>
 <body>
 
+    <div id="top-right-clock"></div>
     <canvas id="canvas"></canvas>
 
-    <div class="scrolling-wrapper">
-        <div class="scrolling-text">ANKEB7T — ANKEB7T — ANKEB7T — ANKEB7T — ANKEB7T</div>
+    <div class="scrolling-wrapper upper">
+        <div class="scrolling-text to-left">ANKEB7T — ANKEB7T — ANKEB7T — ANKEB7T</div>
+    </div>
+
+    <div class="scrolling-wrapper lower">
+        <div class="scrolling-text to-right">@c4ksiber — @c4ksiber — @c4ksiber — @c4ksiber</div>
     </div>
 
     <div id="intro-screen">
@@ -134,29 +142,35 @@
             <div class="info-row"><span class="label">ID:</span> ANKB7T</div>
             <div class="info-row"><span class="label">ROLE:</span> PHANTOM OPERATOR</div>
             <div class="info-row"><span class="label">ACCESS:</span> SYSTEM OVERRIDE</div>
-            <div class="info-row"><span class="label">STATUS:</span> UNDETECTED</div>
+            <div class="info-row"><span class="label">STATUS:</span> ONLINE</div>
         </div>
 
         <div class="button-grid">
-            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">
-                <span class="num">[01]</span> TELEGRAM (@allesfurdie)
-            </a>
-            <a href="https://instagram.com/hissedilme" class="social-link" target="_blank">
-                <span class="num">[02]</span> INSTAGRAM (@hissedilme)
-            </a>
-            <a href="https://wa.me/998998780248" class="social-link" target="_blank">
-                <span class="num">[03]</span> WHATSAPP (+998998780248)
-            </a>
+            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">[01] TELEGRAM (@allesfurdie)</a>
+            <a href="https://instagram.com/hissedilme" class="social-link" target="_blank">[02] INSTAGRAM (@hissedilme)</a>
+            <a href="https://wa.me/998998780248" class="social-link" target="_blank">[03] WHATSAPP (+998998780248)</a>
         </div>
+
+        <div class="footer-text">alles fur die</div>
     </div>
 
     <script>
-        // Matrix Animasyonu
+        // Saat ve Tarih Güncelleme
+        function updateClock() {
+            const now = new Date();
+            const date = now.toLocaleDateString('tr-TR');
+            const time = now.toLocaleTimeString('tr-TR');
+            document.getElementById('top-right-clock').innerHTML = date + "<br>" + time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Matrix Efekti
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const letters = "01";
+        const letters = "01X#";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
@@ -175,7 +189,6 @@
         }
         setInterval(drawMatrix, 50);
 
-        // Sistemi Başlat
         function startSystem() {
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('main-panel').style.display = 'block';
