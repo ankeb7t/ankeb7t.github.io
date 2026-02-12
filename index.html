@@ -29,13 +29,13 @@
         #clock {
             position: fixed; top: 20px; right: 20px;
             text-align: right; font-size: 14px;
-            letter-spacing: 2px;
+            letter-spacing: 2px; z-index: 110;
         }
 
-        /* Yılan Parlama Efekti (ANKEB7T & @C4KSIBER) */
+        /* Yılan Parlama Efekti (Her Zaman Görünür) */
         .bg-text {
             position: fixed; width: 100%; text-align: center;
-            z-index: 1; pointer-events: none;
+            z-index: 50; pointer-events: none;
             font-size: 9vw; font-weight: 900; letter-spacing: 15px;
             text-transform: uppercase;
         }
@@ -52,7 +52,7 @@
 
         @keyframes snake { to { background-position: 200% center; } }
 
-        /* Giriş Ekranı */
+        /* Giriş Ekranı Kaplaması */
         #overlay {
             position: fixed; inset: 0; background: var(--dark);
             z-index: 100; display: flex; flex-direction: column;
@@ -63,9 +63,16 @@
             padding: 20px 60px; border: 1px solid var(--red);
             background: transparent; color: var(--red);
             cursor: pointer; letter-spacing: 15px; font-size: 22px;
-            transition: 0.4s;
+            transition: 0.4s; z-index: 110;
         }
         .open-btn:hover { background: var(--red); color: #000; box-shadow: 0 0 40px var(--red); }
+
+        /* Yükleme Logları */
+        #boot-logs {
+            display: none; color: var(--red); font-size: 14px;
+            text-align: left; width: 280px; margin-top: 20px;
+            line-height: 1.5; z-index: 110;
+        }
 
         /* Ana Panel */
         #terminal {
@@ -76,7 +83,6 @@
             box-shadow: 0 0 50px rgba(255,0,0,0.1);
         }
 
-        /* Sadece Saf Veri */
         .main-data {
             text-align: center; font-size: 32px; 
             font-weight: bold; margin-bottom: 40px;
@@ -108,7 +114,8 @@
 <div class="bg-text bot-bg shine">@C4KSIBER</div>
 
 <div id="overlay">
-    <button class="open-btn" onclick="openSystem()">[ OPEN ]</button>
+    <button class="open-btn" onclick="startBoot()">[ OPEN ]</button>
+    <div id="boot-logs"></div>
 </div>
 
 <div id="terminal">
@@ -157,14 +164,34 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Sistemi Aç
-    function openSystem() {
-        document.getElementById('overlay').style.background = "transparent";
-        document.querySelector('.open-btn').style.display = "none";
-        setTimeout(() => {
-            document.getElementById('overlay').style.display = "none";
-            document.getElementById('terminal').style.display = "block";
-        }, 300);
+    // Giriş ve Boot Animasyonu
+    function startBoot() {
+        const btn = document.querySelector('.open-btn');
+        const logs = document.getElementById('boot-logs');
+        btn.style.display = 'none';
+        logs.style.display = 'block';
+        
+        const lines = [
+            "> Initializing boot sequence...",
+            "> Bypassing local encryption...",
+            "> Connection established.",
+            "> Accessing identity core...",
+            "> System Online."
+        ];
+        
+        let i = 0;
+        const interval = setInterval(() => {
+            if(i < lines.length) {
+                logs.innerHTML += lines[i] + "<br>";
+                i++;
+            } else {
+                clearInterval(interval);
+                setTimeout(() => {
+                    document.getElementById('overlay').style.display = "none";
+                    document.getElementById('terminal').style.display = "block";
+                }, 500);
+            }
+        }, 400);
     }
 </script>
 
