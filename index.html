@@ -23,51 +23,41 @@
             align-items: center;
         }
 
-        /* Saat ve Tarih (Sağ Üst) */
+        /* Saat ve Tarih */
         #top-right-clock {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            text-align: right;
-            font-size: 14px;
-            letter-spacing: 2px;
-            z-index: 20;
-            text-shadow: 0 0 5px var(--primary-red);
+            position: fixed; top: 20px; right: 20px;
+            text-align: right; font-size: 14px;
+            letter-spacing: 2px; z-index: 20;
         }
 
-        /* Kayan Yazı Şeritleri */
-        .scrolling-wrapper {
+        /* Sabit Yazılar ve Parlama Efekti */
+        .static-text-wrapper {
             position: fixed;
             width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
+            text-align: center;
             z-index: 1;
-            opacity: 0.2;
             pointer-events: none;
         }
+        .upper-text { top: 12%; }
+        .lower-text { bottom: 12%; }
 
-        .upper { top: 15%; }
-        .lower { bottom: 15%; }
-
-        .scrolling-text {
-            display: inline-block;
-            font-size: 60px;
+        .shine-text {
+            font-size: 70px;
             font-weight: 900;
+            color: rgba(255, 0, 0, 0.3); /* Yazının ana rengi sönük kırmızı */
+            position: relative;
+            display: inline-block;
             text-transform: uppercase;
             letter-spacing: 15px;
+            background: linear-gradient(to right, #440000 0%, #440000 40%, #fff 50%, #440000 60%, #440000 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine-snake 4s linear infinite;
         }
 
-        .to-left { animation: scroll-left 20s linear infinite; }
-        .to-right { animation: scroll-right 20s linear infinite; }
-
-        @keyframes scroll-left {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-
-        @keyframes scroll-right {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(100%); }
+        @keyframes shine-snake {
+            to { background-position: 200% center; }
         }
 
         /* Matrix Canvas */
@@ -78,10 +68,9 @@
         .open-btn {
             background: transparent; color: var(--primary-red);
             border: 2px solid var(--primary-red); padding: 20px 50px;
-            font-size: 24px; cursor: pointer;
-            box-shadow: 0 0 15px var(--dark-red); transition: 0.3s;
+            font-size: 24px; cursor: pointer; transition: 0.3s;
         }
-        .open-btn:hover { background: var(--primary-red); color: black; }
+        .open-btn:hover { background: var(--primary-red); color: black; box-shadow: 0 0 20px var(--primary-red); }
 
         /* Ana Panel */
         #main-panel {
@@ -89,7 +78,7 @@
             width: 90%; max-width: 500px;
             border: 1px solid var(--primary-red); padding: 35px;
             background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
         }
 
         .card-header {
@@ -99,22 +88,22 @@
         }
 
         .info-section { margin-bottom: 25px; }
-        .info-row { display: flex; margin-bottom: 6px; font-size: 14px; }
-        .label { width: 110px; color: #666; }
+        .info-row { display: flex; margin-bottom: 8px; font-size: 15px; }
+        .label { width: 110px; color: #555; }
 
         .button-grid { display: grid; gap: 12px; }
         .social-link {
             border: 1px solid var(--primary-red); padding: 12px;
             text-decoration: none; color: var(--primary-red);
-            display: flex; transition: 0.3s; font-size: 14px;
+            display: flex; transition: 0.3s;
         }
         .social-link:hover { background: var(--primary-red); color: black; }
 
-        /* Alt Yazı */
         .footer-text {
             text-align: center; margin-top: 25px;
             font-size: 12px; letter-spacing: 8px;
-            text-transform: uppercase; opacity: 0.6;
+            text-transform: uppercase; opacity: 0.8;
+            color: var(--primary-red);
         }
     </style>
 </head>
@@ -123,12 +112,12 @@
     <div id="top-right-clock"></div>
     <canvas id="canvas"></canvas>
 
-    <div class="scrolling-wrapper upper">
-        <div class="scrolling-text to-left">ANKEB7T — ANKEB7T — ANKEB7T — ANKEB7T</div>
+    <div class="static-text-wrapper upper-text">
+        <div class="shine-text">ANKEB7T</div>
     </div>
 
-    <div class="scrolling-wrapper lower">
-        <div class="scrolling-text to-right">@c4ksiber — @c4ksiber — @c4ksiber — @c4ksiber</div>
+    <div class="static-text-wrapper lower-text">
+        <div class="shine-text">@C4KSIBER</div>
     </div>
 
     <div id="intro-screen">
@@ -146,31 +135,27 @@
         </div>
 
         <div class="button-grid">
-            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">[01] TELEGRAM (@allesfurdie)</a>
-            <a href="https://instagram.com/hissedilme" class="social-link" target="_blank">[02] INSTAGRAM (@hissedilme)</a>
-            <a href="https://wa.me/998998780248" class="social-link" target="_blank">[03] WHATSAPP (+998998780248)</a>
+            <a href="https://t.me/allesfurdie" class="social-link" target="_blank">[01] TELEGRAM</a>
+            <a href="https://instagram.com/hissedilme" class="social-link" target="_blank">[02] INSTAGRAM</a>
+            <a href="https://wa.me/998998780248" class="social-link" target="_blank">[03] WHATSAPP</a>
         </div>
 
         <div class="footer-text">alles fur die</div>
     </div>
 
     <script>
-        // Saat ve Tarih Güncelleme
         function updateClock() {
             const now = new Date();
-            const date = now.toLocaleDateString('tr-TR');
-            const time = now.toLocaleTimeString('tr-TR');
-            document.getElementById('top-right-clock').innerHTML = date + "<br>" + time;
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('top-right-clock').innerText = now.toLocaleString('tr-TR', options).replace(',', '');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Matrix Efekti
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const letters = "01X#";
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const letters = "01";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
@@ -178,7 +163,7 @@
         function drawMatrix() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#300"; 
+            ctx.fillStyle = "#200"; 
             ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
                 const text = letters.charAt(Math.floor(Math.random() * letters.length));
