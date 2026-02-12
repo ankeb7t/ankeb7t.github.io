@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHANTOM // ANKEB7T</title>
+    <title>ANKEB7T</title>
     <style>
         :root {
             --red: #ff0000;
-            --dark: #0a0000;
-            --glow: rgba(255, 0, 0, 0.4);
+            --dark: #050000;
         }
 
         body, html {
@@ -23,32 +22,32 @@
             align-items: center;
         }
 
-        /* Arka Plan Matrix */
-        #c { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
+        /* Matrix Arka Plan */
+        #c { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.1; }
 
-        /* Saat & Tarih */
+        /* Sağ Üst Saat */
         #clock {
             position: fixed; top: 20px; right: 20px;
-            text-align: right; font-size: 13px;
-            letter-spacing: 2px; font-weight: bold;
+            text-align: right; font-size: 14px;
+            letter-spacing: 2px;
         }
 
-        /* Snake Shine Efekti (Arka Plan Yazıları) */
+        /* Yılan Parlama Efekti (ANKEB7T & @C4KSIBER) */
         .bg-text {
             position: fixed; width: 100%; text-align: center;
-            z-index: 0; pointer-events: none;
-            font-size: 8vw; font-weight: 900; letter-spacing: 20px;
+            z-index: 1; pointer-events: none;
+            font-size: 9vw; font-weight: 900; letter-spacing: 15px;
             text-transform: uppercase;
         }
-        .top-bg { top: 10%; }
-        .bot-bg { bottom: 10%; }
+        .top-bg { top: 12%; }
+        .bot-bg { bottom: 12%; }
 
         .shine {
-            background: linear-gradient(120deg, #300 30%, #fff 50%, #300 70%);
+            background: linear-gradient(120deg, #200 35%, #fff 50%, #200 65%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: snake 3s linear infinite;
+            animation: snake 3.5s linear infinite;
         }
 
         @keyframes snake { to { background-position: 200% center; } }
@@ -60,42 +59,44 @@
             justify-content: center; align-items: center;
         }
 
-        .btn {
-            padding: 15px 40px; border: 1px solid var(--red);
+        .open-btn {
+            padding: 20px 60px; border: 1px solid var(--red);
             background: transparent; color: var(--red);
-            cursor: pointer; letter-spacing: 10px; font-size: 20px;
-            transition: 0.4s; box-shadow: 0 0 10px var(--glow);
+            cursor: pointer; letter-spacing: 15px; font-size: 22px;
+            transition: 0.4s;
         }
-        .btn:hover { background: var(--red); color: #000; box-shadow: 0 0 30px var(--red); }
+        .open-btn:hover { background: var(--red); color: #000; box-shadow: 0 0 40px var(--red); }
 
-        /* Ana Terminal */
+        /* Ana Panel */
         #terminal {
             display: none; position: relative; z-index: 10;
-            width: 450px; padding: 40px;
+            width: 400px; padding: 50px 30px;
             border: 1px solid var(--red);
-            background: rgba(0,0,0,0.9);
-            box-shadow: 0 0 40px rgba(255,0,0,0.1);
+            background: rgba(0,0,0,0.95);
+            box-shadow: 0 0 50px rgba(255,0,0,0.1);
         }
 
-        .header { border-bottom: 1px solid var(--red); padding-bottom: 10px; margin-bottom: 25px; text-align: center; letter-spacing: 5px; }
-        
-        .status-grid { margin-bottom: 30px; }
-        .status-line { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
-        .val { font-weight: bold; text-shadow: 0 0 5px var(--red); }
+        /* Sadece Saf Veri */
+        .main-data {
+            text-align: center; font-size: 32px; 
+            font-weight: bold; margin-bottom: 40px;
+            letter-spacing: 10px; text-shadow: 0 0 10px var(--red);
+        }
 
-        .links { display: flex; flex-direction: column; gap: 10px; }
+        .links { display: flex; flex-direction: column; gap: 15px; }
         .link-item {
-            padding: 12px; border: 1px solid #300;
+            padding: 15px; border: 1px solid #300;
             text-decoration: none; color: var(--red);
-            display: flex; justify-content: space-between;
-            transition: 0.3s;
+            display: flex; justify-content: center;
+            font-size: 16px; transition: 0.3s;
+            letter-spacing: 3px;
         }
-        .link-item:hover { border-color: var(--red); background: rgba(255,0,0,0.05); transform: scale(1.02); }
+        .link-item:hover { border-color: var(--red); background: rgba(255,0,0,0.1); }
 
-        .footer { margin-top: 30px; text-align: center; font-size: 10px; letter-spacing: 10px; opacity: 0.5; }
-
-        /* Boot Loading Log */
-        #logs { color: var(--red); font-size: 12px; margin-top: 20px; text-align: left; width: 250px; display: none; }
+        .footer { 
+            margin-top: 40px; text-align: center; 
+            font-size: 14px; letter-spacing: 12px; opacity: 0.7; 
+        }
     </style>
 </head>
 <body>
@@ -107,41 +108,32 @@
 <div class="bg-text bot-bg shine">@C4KSIBER</div>
 
 <div id="overlay">
-    <button class="btn" onclick="boot()">[ OPEN ]</button>
-    <div id="logs"></div>
+    <button class="open-btn" onclick="openSystem()">[ OPEN ]</button>
 </div>
 
 <div id="terminal">
-    <div class="header">SYSTEM OVERRIDE</div>
+    <div class="main-data">ANKEB7T</div>
     
-    <div class="status-grid">
-        <div class="status-line"><span>OPERATOR:</span> <span class="val">ANKEB7T</span></div>
-        <div class="status-line"><span>CLEARANCE:</span> <span class="val">ROOT_ACCESS</span></div>
-        <div class="status-line"><span>NETWORK:</span> <span class="val">ENCRYPTED</span></div>
-        <div class="status-line"><span>LOCATION:</span> <span class="val">UNDETECTED</span></div>
-    </div>
-
     <div class="links">
-        <a href="https://t.me/allesfurdie" target="_blank" class="link-item"><span>01_TELEGRAM</span> <span>@allesfurdie</span></a>
-        <a href="https://instagram.com/hissedilme" target="_blank" class="link-item"><span>02_INSTAGRAM</span> <span>@hissedilme</span></a>
-        <a href="https://wa.me/998998780248" target="_blank" class="link-item"><span>03_WHATSAPP</span> <span>+998..248</span></a>
+        <a href="https://t.me/allesfurdie" target="_blank" class="link-item">TELEGRAM</a>
+        <a href="https://instagram.com/hissedilme" target="_blank" class="link-item">INSTAGRAM</a>
+        <a href="https://wa.me/998998780248" target="_blank" class="link-item">WHATSAPP</a>
     </div>
 
     <div class="footer">ALLES FUR DIE</div>
 </div>
 
 <script>
-    // Matrix Arka Plan
+    // Matrix Efekti
     const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const str = "0101X#$@";
+    const str = "01";
     const matrix = str.split("");
     const font_size = 14;
     const columns = canvas.width / font_size;
-    const drops = [];
-    for(let x = 0; x < columns; x++) drops[x] = 1;
+    const drops = Array(Math.floor(columns)).fill(1);
 
     function draw() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
@@ -155,7 +147,7 @@
             drops[i]++;
         }
     }
-    setInterval(draw, 35);
+    setInterval(draw, 40);
 
     // Saat
     function updateClock() {
@@ -165,32 +157,14 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Boot Animasyonu
-    function boot() {
-        const btn = document.querySelector('.btn');
-        const logs = document.getElementById('logs');
-        btn.style.display = 'none';
-        logs.style.display = 'block';
-        
-        const lines = [
-            "> Initializing kernel...",
-            "> Bypassing firewall...",
-            "> Injecting payloads...",
-            "> Access granted.",
-            "> Starting session..."
-        ];
-        
-        let i = 0;
-        const interval = setInterval(() => {
-            if(i < lines.length) {
-                logs.innerHTML += lines[i] + "<br>";
-                i++;
-            } else {
-                clearInterval(interval);
-                document.getElementById('overlay').style.display = 'none';
-                document.getElementById('terminal').style.display = 'block';
-            }
-        }, 400);
+    // Sistemi Aç
+    function openSystem() {
+        document.getElementById('overlay').style.background = "transparent";
+        document.querySelector('.open-btn').style.display = "none";
+        setTimeout(() => {
+            document.getElementById('overlay').style.display = "none";
+            document.getElementById('terminal').style.display = "block";
+        }, 300);
     }
 </script>
 
