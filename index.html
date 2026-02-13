@@ -23,8 +23,7 @@ background:linear-gradient(120deg,#200 35%,#fff 50%,#200 65%);
 background-size:200% auto;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:snake 3.5s linear infinite
-}
+animation:snake 3.5s linear infinite}
 @keyframes snake{to{background-position:200% center}}
 
 #overlay{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
@@ -50,11 +49,10 @@ display:flex;justify-content:center;letter-spacing:3px}
 
 <body>
 
-<!-- YOUTUBE MÜZİK -->
-<iframe id="ytMusic" width="0" height="0"
-src="https://www.youtube.com/embed/BVXtQxkCrdU?enablejsapi=1"
-allow="autoplay">
-</iframe>
+<!-- MP3 MÜZİK -->
+<audio id="music" loop>
+<source src="https://www.myinstants.com/media/sounds/cendere.mp3" type="audio/mpeg">
+</audio>
 
 <canvas id="c"></canvas>
 <div id="clock"></div>
@@ -107,7 +105,9 @@ setInterval(updateClock,1000);updateClock();
 
 // START
 function startBoot(){
-document.getElementById("ytMusic").src += "&autoplay=1";
+
+// 🎧 MÜZİK BAŞLAT
+document.getElementById("music").play();
 
 const btn=document.querySelector('.open-btn');
 const logs=document.getElementById('boot-logs');
