@@ -22,17 +22,14 @@
             align-items: center;
         }
 
-        /* Arka Plan Matrix */
         #c { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.1; }
 
-        /* Sağ Üst Saat */
         #clock {
             position: fixed; top: 20px; right: 20px;
             text-align: right; font-size: 14px;
             letter-spacing: 2px; z-index: 200;
         }
 
-        /* HER AN GÖZÜKEN YILAN PARLAMA EFEKTİ */
         .bg-text {
             position: fixed; width: 100%; text-align: center;
             z-index: 10; pointer-events: none;
@@ -52,7 +49,6 @@
 
         @keyframes snake { to { background-position: 200% center; } }
 
-        /* Giriş Ekranı */
         #overlay {
             position: fixed; inset: 0;
             z-index: 100; display: flex; flex-direction: column;
@@ -74,7 +70,6 @@
             line-height: 1.5; z-index: 110;
         }
 
-        /* Ana Panel */
         #terminal {
             display: none; position: relative; z-index: 120;
             width: 400px; padding: 50px 30px;
@@ -107,7 +102,9 @@
 </head>
 <body>
 
-<audio id="kv-music" src="https://www.myinstants.com/media/sounds/cendere.mp3"></audio>
+<audio id="kv-music" preload="auto">
+    <source src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=433611" type="audio/mpeg">
+</audio>
 
 <canvas id="c"></canvas>
 <div id="clock"></div>
@@ -133,7 +130,6 @@
 </div>
 
 <script>
-    // Matrix Efekti
     const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -158,21 +154,27 @@
     }
     setInterval(draw, 40);
 
-    // Saat
     function updateClock() {
         const now = new Date();
-        const dateStr = now.toLocaleDateString('tr-TR');
-        const timeStr = now.toLocaleTimeString('tr-TR');
-        document.getElementById('clock').innerHTML = dateStr + "<br>" + timeStr;
+        document.getElementById('clock').innerHTML = now.toLocaleString('tr-TR').replace(',', '<br>');
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Giriş ve Müzik Başlatma
     function startBoot() {
-        // Müziği çal
         const music = document.getElementById('kv-music');
-        music.play().catch(e => console.log("Müzik başlatılamadı:", e));
+        
+        // Müziği oynatmayı zorla
+        music.volume = 0.7;
+        const playPromise = music.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                console.log("Müzik başladı.");
+            }).catch(error => {
+                console.log("Müzik hatası:", error);
+            });
+        }
 
         const btn = document.querySelector('.open-btn');
         const logs = document.getElementById('boot-logs');
@@ -199,7 +201,7 @@
                     document.getElementById('terminal').style.display = "block";
                 }, 500);
             }
-        }, 400);
+        }, 500);
     }
 </script>
 
