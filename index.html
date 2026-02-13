@@ -3,107 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANKEB7T</title>
+    <title>ANKEB7T | OPERASYON</title>
     <style>
-        :root {
-            --red: #ff0000;
-            --dark: #050000;
-        }
-
-        body, html {
-            margin: 0; padding: 0;
-            background: var(--dark);
-            color: var(--red);
-            font-family: 'Courier New', monospace;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
+        :root { --red: #ff0000; --dark: #050000; }
+        body, html { margin: 0; padding: 0; background: var(--dark); color: var(--red); font-family: 'Courier New', monospace; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; cursor: pointer; }
         #c { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.1; }
-
-        #clock {
-            position: fixed; top: 20px; right: 20px;
-            text-align: right; font-size: 14px;
-            letter-spacing: 2px; z-index: 200;
-        }
-
-        .bg-text {
-            position: fixed; width: 100%; text-align: center;
-            z-index: 10; pointer-events: none;
-            font-size: 9vw; font-weight: 900; letter-spacing: 15px;
-            text-transform: uppercase;
-        }
+        #clock { position: fixed; top: 20px; right: 20px; text-align: right; font-size: 14px; letter-spacing: 2px; z-index: 200; }
+        
+        .bg-text { position: fixed; width: 100%; text-align: center; z-index: 10; pointer-events: none; font-size: 9vw; font-weight: 900; letter-spacing: 15px; text-transform: uppercase; }
         .top-bg { top: 12%; }
         .bot-bg { bottom: 12%; }
-
-        .shine {
-            background: linear-gradient(120deg, #200 35%, #fff 50%, #200 65%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: snake 3.5s linear infinite;
-        }
-
+        .shine { background: linear-gradient(120deg, #200 35%, #fff 50%, #200 65%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: snake 3.5s linear infinite; }
         @keyframes snake { to { background-position: 200% center; } }
 
-        #overlay {
-            position: fixed; inset: 0;
-            z-index: 100; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            background: rgba(5, 0, 0, 0.4); 
-        }
-
-        .open-btn {
-            padding: 20px 60px; border: 1px solid var(--red);
-            background: transparent; color: var(--red);
-            cursor: pointer; letter-spacing: 15px; font-size: 22px;
-            transition: 0.4s; z-index: 110;
-        }
+        #overlay { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(5, 0, 0, 0.4); }
+        .open-btn { padding: 20px 60px; border: 1px solid var(--red); background: transparent; color: var(--red); cursor: pointer; letter-spacing: 15px; font-size: 22px; transition: 0.4s; z-index: 110; }
         .open-btn:hover { background: var(--red); color: #000; box-shadow: 0 0 40px var(--red); }
+        #boot-logs { display: none; color: var(--red); font-size: 14px; text-align: left; width: 280px; margin-top: 20px; line-height: 1.5; z-index: 110; }
 
-        #boot-logs {
-            display: none; color: var(--red); font-size: 14px;
-            text-align: left; width: 280px; margin-top: 20px;
-            line-height: 1.5; z-index: 110;
-        }
-
-        #terminal {
-            display: none; position: relative; z-index: 120;
-            width: 400px; padding: 50px 30px;
-            border: 1px solid var(--red);
-            background: rgba(0,0,0,0.9);
-            box-shadow: 0 0 50px rgba(255,0,0,0.15);
-        }
-
-        .main-data {
-            text-align: center; font-size: 32px; 
-            font-weight: bold; margin-bottom: 40px;
-            letter-spacing: 10px; text-shadow: 0 0 10px var(--red);
-        }
-
+        #terminal { display: none; position: relative; z-index: 120; width: 400px; padding: 50px 30px; border: 1px solid var(--red); background: rgba(0,0,0,0.9); box-shadow: 0 0 50px rgba(255,0,0,0.15); }
+        .main-data { text-align: center; font-size: 32px; font-weight: bold; margin-bottom: 40px; letter-spacing: 10px; text-shadow: 0 0 10px var(--red); }
         .links { display: flex; flex-direction: column; gap: 15px; }
-        .link-item {
-            padding: 15px; border: 1px solid #300;
-            text-decoration: none; color: var(--red);
-            display: flex; justify-content: center;
-            font-size: 16px; transition: 0.3s;
-            letter-spacing: 3px;
-        }
+        .link-item { padding: 15px; border: 1px solid #300; text-decoration: none; color: var(--red); display: flex; justify-content: center; font-size: 16px; transition: 0.3s; letter-spacing: 3px; }
         .link-item:hover { border-color: var(--red); background: rgba(255,0,0,0.1); }
-
-        .footer { 
-            margin-top: 40px; text-align: center; 
-            font-size: 14px; letter-spacing: 12px; opacity: 0.7; 
-        }
+        .footer { margin-top: 40px; text-align: center; font-size: 14px; letter-spacing: 12px; opacity: 0.7; }
     </style>
 </head>
-<body>
+<body onclick="unmuteMusic()">
 
-<audio id="kv-music" preload="auto">
-    <source src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=433611" type="audio/mpeg">
+<audio id="kv-music" loop>
+    <source src="https://www.myinstants.com/media/sounds/cendere.mp3" type="audio/mpeg">
 </audio>
 
 <canvas id="c"></canvas>
@@ -119,32 +48,57 @@
 
 <div id="terminal">
     <div class="main-data">ANKEB7T</div>
-    
     <div class="links">
         <a href="https://t.me/allesfurdie" target="_blank" class="link-item">TELEGRAM</a>
         <a href="https://instagram.com/hissedilme" target="_blank" class="link-item">INSTAGRAM</a>
         <a href="https://wa.me/998998780248" target="_blank" class="link-item">WHATSAPP</a>
     </div>
-
     <div class="footer">ALLES FUR DIE</div>
 </div>
 
 <script>
+    const music = document.getElementById('kv-music');
+    
+    // Sayfaya girer girmez çalmaya çalış (Sessiz modda başlar)
+    window.addEventListener('load', () => {
+        music.muted = true;
+        music.play();
+    });
+
+    // Kullanıcı herhangi bir yere tıkladığı an sesi aç
+    function unmuteMusic() {
+        music.muted = false;
+    }
+
+    function startBoot() {
+        unmuteMusic(); // Butona basınca da sesi garantiye al
+        const btn = document.querySelector('.open-btn');
+        const logs = document.getElementById('boot-logs');
+        btn.style.display = 'none';
+        logs.style.display = 'block';
+        
+        const lines = ["> Initializing...", "> Bypassing encryption...", "> Connection established.", "> System Online."];
+        let i = 0;
+        const interval = setInterval(() => {
+            if(i < lines.length) { logs.innerHTML += lines[i] + "<br>"; i++; }
+            else { clearInterval(interval); setTimeout(() => {
+                document.getElementById('overlay').style.display = "none";
+                document.getElementById('terminal').style.display = "block";
+            }, 500); }
+        }, 400);
+    }
+
+    // Matrix & Saat Fonksiyonları
     const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const str = "01";
-    const matrix = str.split("");
-    const font_size = 14;
-    const columns = canvas.width / font_size;
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const str = "01"; const matrix = str.split("");
+    const font_size = 14; const columns = canvas.width / font_size;
     const drops = Array(Math.floor(columns)).fill(1);
 
     function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#200";
-        ctx.font = font_size + "px arial";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#200"; ctx.font = font_size + "px arial";
         for(let i = 0; i < drops.length; i++) {
             const text = matrix[Math.floor(Math.random()*matrix.length)];
             ctx.fillText(text, i*font_size, drops[i]*font_size);
@@ -153,57 +107,11 @@
         }
     }
     setInterval(draw, 40);
-
     function updateClock() {
         const now = new Date();
         document.getElementById('clock').innerHTML = now.toLocaleString('tr-TR').replace(',', '<br>');
     }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function startBoot() {
-        const music = document.getElementById('kv-music');
-        
-        // Müziği oynatmayı zorla
-        music.volume = 0.7;
-        const playPromise = music.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                console.log("Müzik başladı.");
-            }).catch(error => {
-                console.log("Müzik hatası:", error);
-            });
-        }
-
-        const btn = document.querySelector('.open-btn');
-        const logs = document.getElementById('boot-logs');
-        btn.style.display = 'none';
-        logs.style.display = 'block';
-        
-        const lines = [
-            "> Initializing boot sequence...",
-            "> Bypassing local encryption...",
-            "> Connection established.",
-            "> Accessing identity core...",
-            "> System Online."
-        ];
-        
-        let i = 0;
-        const interval = setInterval(() => {
-            if(i < lines.length) {
-                logs.innerHTML += lines[i] + "<br>";
-                i++;
-            } else {
-                clearInterval(interval);
-                setTimeout(() => {
-                    document.getElementById('overlay').style.display = "none";
-                    document.getElementById('terminal').style.display = "block";
-                }, 500);
-            }
-        }, 500);
-    }
+    setInterval(updateClock, 1000); updateClock();
 </script>
-
 </body>
 </html>
