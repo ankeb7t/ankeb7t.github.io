@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANKEB7T</title>
+    <title>ANKEB7T ZİRVE</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,29 +15,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column; /* İçerikleri dikeyde hizalar */
             overflow: hidden;
             position: relative;
         }
 
-        /* GECİKMESİZ TARİH (SAĞ ÜST) */
+        /* SAĞ ÜST TARİH (SABİT VE EN ÜSTTE) */
         #datetime {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 20px;
+            right: 25px;
             text-align: right;
-            font-size: 14px;
+            font-size: 16px;
             letter-spacing: 2px;
+            z-index: 1000; /* Her şeyin üstünde */
             font-weight: bold;
         }
 
-        /* SHINE (PARLAMA) EFEKTİ */
+        /* SHINE EFEKTİ */
         .shine-text {
-            background: linear-gradient(to right, #4d0000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #4d0000 80%);
+            background: linear-gradient(to right, #330000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #330000 80%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 2.5s linear infinite;
+            animation: shine 3s linear infinite;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -46,18 +46,39 @@
             to { background-position: 200% center; }
         }
 
-        /* ÜST BAŞLIK (YAKINLAŞTIRILDI) */
-        .header-title {
-            font-size: 55px;
-            letter-spacing: 8px;
-            margin-bottom: 20px; /* Orta kutuyla arasını kapattık */
+        /* ARKADA SABİT DURAN DEV YAZILAR (Z-INDEX: 1) */
+        .background-titles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1; /* En arkada */
+            pointer-events: none; /* Tıklamayı engellemez */
         }
 
-        /* ALT BAŞLIK (YAKINLAŞTIRILDI) */
-        .footer-title {
-            font-size: 65px;
-            letter-spacing: 12px;
-            margin-top: 20px; /* Orta kutuyla arasını kapattık */
+        .bg-header {
+            font-size: clamp(60px, 15vw, 120px);
+            letter-spacing: 15px;
+            margin-bottom: 250px; /* Aradaki boşluk panel için */
+        }
+
+        .bg-footer {
+            font-size: clamp(70px, 18vw, 140px);
+            letter-spacing: 25px;
+        }
+
+        /* ÖN PLANDAKİ ETKİLEŞİM ALANI (Z-INDEX: 10) */
+        .foreground-container {
+            position: relative;
+            z-index: 10; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
         }
 
         /* OPEN BUTONU */
@@ -65,63 +86,68 @@
             background: transparent;
             color: #ff0000;
             border: 1px solid #ff0000;
-            padding: 12px 45px;
+            padding: 15px 60px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             font-family: inherit;
-            letter-spacing: 5px;
-            transition: 0.3s;
+            letter-spacing: 10px;
+            transition: 0.4s;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
         #open-btn:hover {
             background: #ff0000;
             color: #000;
-            box-shadow: 0 0 20px #ff0000;
+            box-shadow: 0 0 40px #ff0000;
         }
 
-        /* SOSYAL MEDYA PANELİ */
+        /* BÜYÜTÜLMÜŞ SOSYAL MEDYA KUTUSU */
         #main-content {
             display: none;
             flex-direction: column;
             align-items: center;
             border: 1px solid #ff0000;
-            padding: 25px;
-            width: 300px;
-            background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-            animation: fadeIn 0.3s ease-out;
+            padding: 50px 40px;
+            width: 400px; /* Kutuyu büyüttüm */
+            background: rgba(0, 0, 0, 0.85); /* Arkadaki yazılar hafif görünsün diye hafif transparan */
+            backdrop-filter: blur(5px); /* Arkadaki yazıları hafif buğular, çok şık durur */
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+            animation: boxScale 0.4s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
+        @keyframes boxScale {
+            from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        .inner-title { font-size: 20px; letter-spacing: 4px; margin-bottom: 15px; }
+        .inner-title { font-size: 30px; letter-spacing: 6px; margin-bottom: 30px; }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
         }
 
         .btn {
-            border: 1px solid #440000;
+            border: 1px solid #660000;
             color: #ff0000;
-            padding: 10px;
+            padding: 15px;
             text-decoration: none;
             text-align: center;
-            font-size: 13px;
-            letter-spacing: 2px;
-            transition: 0.2s;
+            font-size: 16px;
+            letter-spacing: 3px;
+            transition: 0.3s;
+            background: rgba(10, 0, 0, 0.5);
         }
         .btn:hover {
             border-color: #ff0000;
-            background: rgba(255, 0, 0, 0.1);
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 15px #ff0000;
         }
 
-        .tagline { font-size: 10px; letter-spacing: 4px; opacity: 0.8; }
+        .tagline { font-size: 12px; letter-spacing: 8px; opacity: 0.8; }
 
     </style>
 </head>
@@ -132,30 +158,35 @@
         <div id="time"></div>
     </div>
 
-    <div class="header-title shine-text">ANKEB7T</div>
-
-    <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
-
-    <div id="main-content">
-        <div class="inner-title shine-text">ANKEB7T</div>
-        
-        <div class="links">
-            <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
-            <a href="https://instagram.com/ankeb7t01" class="btn" target="_blank">INSTAGRAM</a>
-            <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
-        </div>
-
-        <div class="tagline shine-text">ALLES FUR DIE</div>
+    <div class="background-titles">
+        <div class="bg-header shine-text">ANKEB7T</div>
+        <div class="bg-footer shine-text">ZİRVE</div>
     </div>
 
-    <div class="footer-title shine-text">ZİRVE</div>
+    <div class="foreground-container">
+        <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
+
+        <div id="main-content">
+            <div class="inner-title shine-text">ANKEB7T</div>
+            
+            <div class="links">
+                <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
+                <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
+                <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
+            </div>
+
+            <div class="tagline shine-text">ALLES FUR DIE</div>
+        </div>
+    </div>
 
     <script>
+        // Butona basınca paneli aç
         function openSite() {
             document.getElementById('open-btn').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
         }
 
+        // Tarih ve saat (Sıfır gecikme)
         function updateClock() {
             const now = new Date();
             const d = String(now.getDate()).padStart(2, '0');
