@@ -18,7 +18,7 @@
             overflow: hidden;
         }
 
-        /* GECİKMESİZ TARİH */
+        /* GECİKMESİZ TARİH (SAĞ ÜST) */
         #datetime {
             position: fixed;
             top: 15px;
@@ -27,9 +27,10 @@
             font-size: 16px;
             letter-spacing: 2px;
             z-index: 1000;
+            font-weight: bold;
         }
 
-        /* SHINE EFEKTİ */
+        /* SHINE (PARLAMA) EFEKTİ */
         .shine-text {
             background: linear-gradient(to right, #4d0000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #4d0000 80%);
             background-size: 200% auto;
@@ -44,7 +45,7 @@
             to { background-position: 200% center; }
         }
 
-        /* HEP GÖRÜNECEK BAŞLIKLAR */
+        /* SABİT BAŞLIKLAR */
         .fixed-header {
             position: fixed;
             top: 50px;
@@ -74,52 +75,53 @@
             transition: 0.4s;
             z-index: 600;
         }
-        #open-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 30px #ff0000; }
-
-        /* HACKER KONSOLU */
-        #hacker-console {
-            display: none;
-            text-align: left;
-            width: 350px;
-            height: 120px;
-            padding: 15px;
-            font-size: 14px;
-            background: rgba(10, 0, 0, 0.9);
-            border: 1px solid #ff0000;
-            overflow: hidden;
-            z-index: 600;
+        #open-btn:hover { 
+            background: #ff0000; 
+            color: #000; 
+            box-shadow: 0 0 30px #ff0000; 
         }
 
-        #hacker-console p { margin: 4px 0; white-space: nowrap; font-weight: bold; }
-
-        /* SOSYAL MEDYA KUTUSU */
+        /* SOSYAL MEDYA KUTUSU (KÜÇÜK VE ŞIK) */
         #main-content {
             display: none;
             flex-direction: column;
             align-items: center;
             border: 1px solid #ff0000;
-            padding: 20px;
+            padding: 25px;
             width: 280px;
             background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease;
             z-index: 600;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: scale(0.9); } 
+            to { opacity: 1; transform: scale(1); } 
+        }
 
-        .links { display: flex; flex-direction: column; gap: 10px; width: 100%; margin: 15px 0; }
+        .links { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            width: 100%; 
+            margin: 15px 0; 
+        }
+        
         .btn {
             border: 1px solid #440000;
             color: #ff0000;
-            padding: 8px;
+            padding: 10px;
             text-decoration: none;
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 2px;
             transition: 0.3s;
         }
-        .btn:hover { border-color: #ff0000; background: rgba(255,0,0,0.15); }
+        .btn:hover { 
+            border-color: #ff0000; 
+            background: rgba(255,0,0,0.15); 
+        }
     </style>
 </head>
 <body>
@@ -132,53 +134,28 @@
     <div class="fixed-header shine-text">ANKEB7T</div>
     <div class="fixed-footer shine-text">ZİRVE</div>
 
-    <button id="open-btn" onclick="startBoot()">[ OPEN ]</button>
-
-    <div id="hacker-console" class="shine-text"></div>
+    <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
 
     <div id="main-content">
-        <div style="font-size: 20px; letter-spacing: 4px;" class="shine-text">ANKEB7T</div>
+        <div style="font-size: 22px; letter-spacing: 5px;" class="shine-text">ANKEB7T</div>
+        
         <div class="links">
             <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
             <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
             <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
         </div>
-        <div style="font-size: 10px; letter-spacing: 5px; opacity: 0.7;" class="shine-text">ALLES FUR DIE</div>
+
+        <div style="font-size: 10px; letter-spacing: 6px; opacity: 0.8;" class="shine-text">ALLES FUR DIE</div>
     </div>
 
     <script>
-        const logs = [
-            "> INITIALIZING BOOT...",
-            "> BYPASSING SECURITY...",
-            "> ACCESSING DATABASE...",
-            "> UPLOADING IDENTITY...",
-            "> CONNECTION STABLE...",
-            "> SYSTEM READY..."
-        ];
-
-        function startBoot() {
+        // Direkt paneli açan fonksiyon
+        function openSite() {
             document.getElementById('open-btn').style.display = 'none';
-            const consoleEl = document.getElementById('hacker-console');
-            consoleEl.style.display = 'block';
-
-            let line = 0;
-            // HIZI BURADAN AYARLADIM (150ms yaptık, çok daha seri)
-            const interval = setInterval(() => {
-                if (line < logs.length) {
-                    const p = document.createElement('p');
-                    p.textContent = logs[line];
-                    consoleEl.appendChild(p);
-                    line++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        consoleEl.style.display = 'none';
-                        document.getElementById('main-content').style.display = 'flex';
-                    }, 300); // Bitiş bekleme süresini de kısalttım
-                }
-            }, 150); 
+            document.getElementById('main-content').style.display = 'flex';
         }
 
+        // Tarih ve Saat (Bekleme yapmaz)
         function updateClock() {
             const now = new Date();
             const d = String(now.getDate()).padStart(2, '0');
@@ -187,10 +164,12 @@
             const h = String(now.getHours()).padStart(2, '0');
             const min = String(now.getMinutes()).padStart(2, '0');
             const sec = String(now.getSeconds()).padStart(2, '0');
+            
             document.getElementById('date').innerText = d + "." + m + "." + y;
             document.getElementById('time').innerText = h + ":" + min + ":" + sec;
         }
 
+        // Sayfa açılır açılmaz çalıştır
         updateClock();
         setInterval(updateClock, 1000);
     </script>
