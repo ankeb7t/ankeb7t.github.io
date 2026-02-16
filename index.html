@@ -18,7 +18,7 @@
             overflow: hidden;
         }
 
-        /* GECİKMESİZ TARİH (SAĞ ÜST) */
+        /* GECİKMESİZ TARİH */
         #datetime {
             position: fixed;
             top: 15px;
@@ -27,10 +27,9 @@
             font-size: 16px;
             letter-spacing: 2px;
             z-index: 1000;
-            font-weight: bold;
         }
 
-        /* SHINE (PARLAMA) EFEKTİ */
+        /* SHINE EFEKTİ */
         .shine-text {
             background: linear-gradient(to right, #4d0000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #4d0000 80%);
             background-size: 200% auto;
@@ -45,83 +44,82 @@
             to { background-position: 200% center; }
         }
 
-        /* ANA BAŞLIKLAR (SABİT) */
-        .header-title { font-size: 70px; letter-spacing: 12px; margin-bottom: 5px; }
-        .footer-title { font-size: 80px; letter-spacing: 20px; margin-top: 15px; opacity: 0.9; }
-
-        /* HACKER YAZILARI KUTUSU */
-        #hacker-console {
-            margin: 20px 0;
-            text-align: left;
-            width: 380px; /* Konsol genişliği */
-            height: 150px; /* Konsol yüksekliği */
-            overflow: hidden; /* Taşmayı engelle */
-            padding: 10px;
-            font-size: 14px;
-            letter-spacing: 1px;
-            color: #00ff00; /* Konsol yazısı yeşil yaptım, istersen kırmızı yapabiliriz */
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+        /* HEP GÖRÜNECEK BAŞLIKLAR */
+        .fixed-header {
+            position: fixed;
+            top: 50px;
+            font-size: 70px;
+            letter-spacing: 12px;
+            z-index: 500;
         }
 
-        #hacker-console p {
-            margin: 0;
-            line-height: 1.5;
-            white-space: nowrap; /* Tek satırda kalmasını sağlar */
-            overflow: hidden; /* Yazı taşarsa gizler */
-            display: none; /* Başta gizli */
+        .fixed-footer {
+            position: fixed;
+            bottom: 50px;
+            font-size: 80px;
+            letter-spacing: 20px;
+            z-index: 500;
         }
 
         /* OPEN BUTONU */
         #open-btn {
-            display: none; /* Başta gizli */
             background: transparent;
             color: #ff0000;
             border: 1px solid #ff0000;
-            padding: 12px 40px;
+            padding: 12px 45px;
             cursor: pointer;
             font-size: 18px;
             font-family: 'Courier New', sans-serif;
             letter-spacing: 6px;
-            margin: 20px 0;
             transition: 0.4s;
-            animation: fadeIn 0.5s ease-in forwards;
+            z-index: 600;
         }
         #open-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 30px #ff0000; }
 
-        /* ORTA KUTUCUK (KÜÇÜLTÜLMÜŞ) */
+        /* HACKER KONSOLU */
+        #hacker-console {
+            display: none;
+            text-align: left;
+            width: 350px;
+            height: 120px;
+            padding: 15px;
+            font-size: 14px;
+            background: rgba(10, 0, 0, 0.9);
+            border: 1px solid #ff0000;
+            overflow: hidden;
+            z-index: 600;
+        }
+
+        #hacker-console p { margin: 4px 0; white-space: nowrap; font-weight: bold; }
+
+        /* SOSYAL MEDYA KUTUSU */
         #main-content {
-            display: none; 
+            display: none;
             flex-direction: column;
             align-items: center;
             border: 1px solid #ff0000;
-            padding: 25px;
-            width: 300px;
+            padding: 20px;
+            width: 280px;
             background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeIn 0.4s ease;
+            z-index: 600;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        .inner-title { font-size: 24px; letter-spacing: 5px; margin-bottom: 20px; }
-
-        /* LİNKLER */
-        .links { display: flex; flex-direction: column; gap: 12px; width: 100%; margin: 15px 0; }
+        .links { display: flex; flex-direction: column; gap: 10px; width: 100%; margin: 15px 0; }
         .btn {
             border: 1px solid #440000;
             color: #ff0000;
-            padding: 10px;
+            padding: 8px;
             text-decoration: none;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 2px;
             transition: 0.3s;
         }
         .btn:hover { border-color: #ff0000; background: rgba(255,0,0,0.15); }
-        
-        .alles-text { font-size: 10px; letter-spacing: 6px; opacity: 0.8; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -131,74 +129,56 @@
         <div id="time"></div>
     </div>
 
-    <div class="header-title shine-text">ANKEB7T</div>
+    <div class="fixed-header shine-text">ANKEB7T</div>
+    <div class="fixed-footer shine-text">ZİRVE</div>
 
-    <div id="hacker-console">
-        </div>
+    <button id="open-btn" onclick="startBoot()">[ OPEN ]</button>
 
-    <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
+    <div id="hacker-console" class="shine-text"></div>
 
     <div id="main-content">
-        <div class="inner-title shine-text">ANKEB7T</div>
-        
+        <div style="font-size: 20px; letter-spacing: 4px;" class="shine-text">ANKEB7T</div>
         <div class="links">
             <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
             <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
             <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
         </div>
-
-        <div class="alles-text shine-text">ALLES FUR DIE</div>
+        <div style="font-size: 10px; letter-spacing: 5px; opacity: 0.7;" class="shine-text">ALLES FUR DIE</div>
     </div>
 
-    <div class="footer-title shine-text">ZİRVE</div>
-
     <script>
-        const hackerTexts = [
-            "> Initializing boot sequence...",
-            "> Bypassing local encryption...",
-            "> Connection established.",
-            "> Accessing identity core...",
-            "> Retrieving authorized credentials...",
-            "> Process complete. Ready for input."
+        const logs = [
+            "> INITIALIZING BOOT...",
+            "> BYPASSING SECURITY...",
+            "> ACCESSING DATABASE...",
+            "> UPLOADING IDENTITY...",
+            "> CONNECTION STABLE...",
+            "> SYSTEM READY..."
         ];
-        let textIndex = 0;
-        let charIndex = 0;
-        const consoleElement = document.getElementById('hacker-console');
-        const openBtn = document.getElementById('open-btn');
 
-        function typeWriter() {
-            if (textIndex < hackerTexts.length) {
-                if (charIndex < hackerTexts[textIndex].length) {
-                    let currentP = consoleElement.querySelector('.current-line');
-                    if (!currentP) {
-                        currentP = document.createElement('p');
-                        currentP.className = 'current-line';
-                        currentP.style.display = 'block'; // Yazı görünür olsun
-                        consoleElement.appendChild(currentP);
-                    }
-                    currentP.textContent += hackerTexts[textIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, 50); // Harf yazma hızı
+        function startBoot() {
+            document.getElementById('open-btn').style.display = 'none';
+            const consoleEl = document.getElementById('hacker-console');
+            consoleEl.style.display = 'block';
+
+            let line = 0;
+            // HIZI BURADAN AYARLADIM (150ms yaptık, çok daha seri)
+            const interval = setInterval(() => {
+                if (line < logs.length) {
+                    const p = document.createElement('p');
+                    p.textContent = logs[line];
+                    consoleEl.appendChild(p);
+                    line++;
                 } else {
-                    consoleElement.querySelector('.current-line').classList.remove('current-line');
-                    charIndex = 0;
-                    textIndex++;
-                    // Yeni satıra geçmeden önce hafif bekleme
-                    setTimeout(typeWriter, 800); 
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        consoleEl.style.display = 'none';
+                        document.getElementById('main-content').style.display = 'flex';
+                    }, 300); // Bitiş bekleme süresini de kısalttım
                 }
-            } else {
-                // Tüm yazılar bittiğinde open butonunu göster
-                openBtn.style.display = 'block';
-            }
+            }, 150); 
         }
 
-        function openSite() {
-            openBtn.style.display = 'none';
-            consoleElement.style.display = 'none'; // Konsolu gizle
-            document.getElementById('main-content').style.display = 'flex';
-        }
-
-        // Tarih ve Saat Fonksiyonu (Gecikmesiz)
         function updateClock() {
             const now = new Date();
             const d = String(now.getDate()).padStart(2, '0');
@@ -207,18 +187,12 @@
             const h = String(now.getHours()).padStart(2, '0');
             const min = String(now.getMinutes()).padStart(2, '0');
             const sec = String(now.getSeconds()).padStart(2, '0');
-
             document.getElementById('date').innerText = d + "." + m + "." + y;
             document.getElementById('time').innerText = h + ":" + min + ":" + sec;
         }
 
-        // Sayfa yüklendiğinde hemen çalışacaklar
-        window.onload = function() {
-            updateClock(); // Tarihi anında göster
-            setInterval(updateClock, 1000); // Sonra her saniye güncelle
-            typeWriter(); // Hacker efektini başlat
-        };
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
-
 </body>
 </html>
