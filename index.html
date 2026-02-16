@@ -49,8 +49,33 @@
         .header-title { font-size: 70px; letter-spacing: 12px; margin-bottom: 5px; }
         .footer-title { font-size: 80px; letter-spacing: 20px; margin-top: 15px; opacity: 0.9; }
 
+        /* HACKER YAZILARI KUTUSU */
+        #hacker-console {
+            margin: 20px 0;
+            text-align: left;
+            width: 380px; /* Konsol genişliği */
+            height: 150px; /* Konsol yüksekliği */
+            overflow: hidden; /* Taşmayı engelle */
+            padding: 10px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #00ff00; /* Konsol yazısı yeşil yaptım, istersen kırmızı yapabiliriz */
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+        }
+
+        #hacker-console p {
+            margin: 0;
+            line-height: 1.5;
+            white-space: nowrap; /* Tek satırda kalmasını sağlar */
+            overflow: hidden; /* Yazı taşarsa gizler */
+            display: none; /* Başta gizli */
+        }
+
         /* OPEN BUTONU */
         #open-btn {
+            display: none; /* Başta gizli */
             background: transparent;
             color: #ff0000;
             border: 1px solid #ff0000;
@@ -61,6 +86,7 @@
             letter-spacing: 6px;
             margin: 20px 0;
             transition: 0.4s;
+            animation: fadeIn 0.5s ease-in forwards;
         }
         #open-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 30px #ff0000; }
 
@@ -70,8 +96,8 @@
             flex-direction: column;
             align-items: center;
             border: 1px solid #ff0000;
-            padding: 25px; /* İç boşluğu daralttım */
-            width: 300px;  /* Genişliği küçülttüm */
+            padding: 25px;
+            width: 300px;
             background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
             animation: fadeIn 0.5s ease-in;
@@ -107,6 +133,9 @@
 
     <div class="header-title shine-text">ANKEB7T</div>
 
+    <div id="hacker-console">
+        </div>
+
     <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
 
     <div id="main-content">
@@ -124,11 +153,52 @@
     <div class="footer-title shine-text">ZİRVE</div>
 
     <script>
+        const hackerTexts = [
+            "> Initializing boot sequence...",
+            "> Bypassing local encryption...",
+            "> Connection established.",
+            "> Accessing identity core...",
+            "> Retrieving authorized credentials...",
+            "> Process complete. Ready for input."
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        const consoleElement = document.getElementById('hacker-console');
+        const openBtn = document.getElementById('open-btn');
+
+        function typeWriter() {
+            if (textIndex < hackerTexts.length) {
+                if (charIndex < hackerTexts[textIndex].length) {
+                    let currentP = consoleElement.querySelector('.current-line');
+                    if (!currentP) {
+                        currentP = document.createElement('p');
+                        currentP.className = 'current-line';
+                        currentP.style.display = 'block'; // Yazı görünür olsun
+                        consoleElement.appendChild(currentP);
+                    }
+                    currentP.textContent += hackerTexts[textIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50); // Harf yazma hızı
+                } else {
+                    consoleElement.querySelector('.current-line').classList.remove('current-line');
+                    charIndex = 0;
+                    textIndex++;
+                    // Yeni satıra geçmeden önce hafif bekleme
+                    setTimeout(typeWriter, 800); 
+                }
+            } else {
+                // Tüm yazılar bittiğinde open butonunu göster
+                openBtn.style.display = 'block';
+            }
+        }
+
         function openSite() {
-            document.getElementById('open-btn').style.display = 'none';
+            openBtn.style.display = 'none';
+            consoleElement.style.display = 'none'; // Konsolu gizle
             document.getElementById('main-content').style.display = 'flex';
         }
 
+        // Tarih ve Saat Fonksiyonu (Gecikmesiz)
         function updateClock() {
             const now = new Date();
             const d = String(now.getDate()).padStart(2, '0');
@@ -142,9 +212,12 @@
             document.getElementById('time').innerText = h + ":" + min + ":" + sec;
         }
 
-        // Gecikmeyi öldüren satır:
-        updateClock();
-        setInterval(updateClock, 1000);
+        // Sayfa yüklendiğinde hemen çalışacaklar
+        window.onload = function() {
+            updateClock(); // Tarihi anında göster
+            setInterval(updateClock, 1000); // Sonra her saniye güncelle
+            typeWriter(); // Hacker efektini başlat
+        };
     </script>
 
 </body>
