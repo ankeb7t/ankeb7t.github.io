@@ -19,7 +19,7 @@
             position: relative;
         }
 
-        /* SAĞ ÜST TARİH (SABİT VE EN ÜSTTE) */
+        /* SAĞ ÜST TARİH */
         #datetime {
             position: absolute;
             top: 20px;
@@ -27,11 +27,11 @@
             text-align: right;
             font-size: 16px;
             letter-spacing: 2px;
-            z-index: 1000; /* Her şeyin üstünde */
+            z-index: 1000;
             font-weight: bold;
         }
 
-        /* SHINE EFEKTİ */
+        /* SHINE EFEKTİ (Yazıların panel içinden parlamasını sağlar) */
         .shine-text {
             background: linear-gradient(to right, #330000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #330000 80%);
             background-size: 200% auto;
@@ -46,7 +46,7 @@
             to { background-position: 200% center; }
         }
 
-        /* ARKADA SABİT DURAN DEV YAZILAR (Z-INDEX: 1) */
+        /* ARKADAKİ SABİT YAZILAR (HİÇ KAPANMAZ) */
         .background-titles {
             position: absolute;
             width: 100%;
@@ -55,14 +55,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1; /* En arkada */
-            pointer-events: none; /* Tıklamayı engellemez */
+            z-index: 1; /* En alt katman */
         }
 
         .bg-header {
             font-size: clamp(60px, 15vw, 120px);
             letter-spacing: 15px;
-            margin-bottom: 250px; /* Aradaki boşluk panel için */
+            margin-bottom: 220px; /* Panel tam araya otursun diye */
         }
 
         .bg-footer {
@@ -70,10 +69,10 @@
             letter-spacing: 25px;
         }
 
-        /* ÖN PLANDAKİ ETKİLEŞİM ALANI (Z-INDEX: 10) */
+        /* ÖN PLANDAKİ ETKİLEŞİM */
         .foreground-container {
             position: relative;
-            z-index: 10; 
+            z-index: 10; /* Yazıların üstüne biner */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -81,7 +80,6 @@
             height: 100%;
         }
 
-        /* OPEN BUTONU */
         #open-btn {
             background: transparent;
             color: #ff0000;
@@ -92,34 +90,30 @@
             font-family: inherit;
             letter-spacing: 10px;
             transition: 0.4s;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
-        #open-btn:hover {
-            background: #ff0000;
-            color: #000;
-            box-shadow: 0 0 40px #ff0000;
-        }
+        #open-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 30px #ff0000; }
 
-        /* BÜYÜTÜLMÜŞ SOSYAL MEDYA KUTUSU */
+        /* SEŞFAF GEÇİŞLİ BÜYÜK KUTU */
         #main-content {
             display: none;
             flex-direction: column;
             align-items: center;
             border: 1px solid #ff0000;
             padding: 50px 40px;
-            width: 400px; /* Kutuyu büyüttüm */
-            background: rgba(0, 0, 0, 0.85); /* Arkadaki yazılar hafif görünsün diye hafif transparan */
-            backdrop-filter: blur(5px); /* Arkadaki yazıları hafif buğular, çok şık durur */
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+            width: 420px;
+            /* Siyahlığı koruyan ama arkadaki parlamayı geçiren ayar: */
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(2px); /* Yazıları net tutmak için bluru çok az tuttum */
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
             animation: boxScale 0.4s ease-out;
         }
 
         @keyframes boxScale {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        .inner-title { font-size: 30px; letter-spacing: 6px; margin-bottom: 30px; }
+        .inner-title { font-size: 26px; letter-spacing: 5px; margin-bottom: 30px; }
 
         .links {
             display: flex;
@@ -138,7 +132,7 @@
             font-size: 16px;
             letter-spacing: 3px;
             transition: 0.3s;
-            background: rgba(10, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
         }
         .btn:hover {
             border-color: #ff0000;
@@ -147,7 +141,7 @@
             box-shadow: 0 0 15px #ff0000;
         }
 
-        .tagline { font-size: 12px; letter-spacing: 8px; opacity: 0.8; }
+        .tagline { font-size: 12px; letter-spacing: 8px; opacity: 0.9; }
 
     </style>
 </head>
@@ -180,13 +174,11 @@
     </div>
 
     <script>
-        // Butona basınca paneli aç
         function openSite() {
             document.getElementById('open-btn').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
         }
 
-        // Tarih ve saat (Sıfır gecikme)
         function updateClock() {
             const now = new Date();
             const d = String(now.getDate()).padStart(2, '0');
