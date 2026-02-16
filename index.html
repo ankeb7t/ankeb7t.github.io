@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -15,31 +16,42 @@ overflow:hidden;
 }
 
 /* Büyük arka yazılar */
-.bg{
+.big{
 position:fixed;
 width:100%;
 text-align:center;
-font-size:120px;
+font-weight:900;
 letter-spacing:30px;
-opacity:.08;
 pointer-events:none;
 }
 
-.top{ top:50px; }
-.bottom{ bottom:40px; }
+#top{
+top:70px;
+font-size:120px;
+opacity:.25;
+}
+
+#bottom{
+bottom:40px;
+font-size:90px;
+opacity:.25;
+}
 
 /* Shine efekti */
-.scan{
+.shine{
 position:fixed;
-width:100%;
-height:2px;
-background:red;
-animation:scan 3s linear infinite;
-opacity:.5;
+top:0;
+left:-100%;
+width:200%;
+height:100%;
+background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.8),transparent 60%);
+animation:shine 4s linear infinite;
+pointer-events:none;
 }
-@keyframes scan{
-0%{top:0;}
-100%{top:100%;}
+
+@keyframes shine{
+0%{left:-100%;}
+100%{left:100%;}
 }
 
 /* Tarih */
@@ -51,14 +63,38 @@ letter-spacing:3px;
 font-size:14px;
 }
 
-/* Boot yazıları */
+/* OPEN ekran */
+#openScreen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+button{
+border:1px solid red;
+background:none;
+color:red;
+padding:15px 50px;
+font-size:20px;
+letter-spacing:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:red;
+color:black;
+}
+
+/* Boot */
 #boot{
+display:none;
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 text-align:left;
-letter-spacing:2px;
 }
 
 /* Panel */
@@ -93,11 +129,16 @@ color:black;
 
 <body>
 
-<div class="bg top">ANKEB7T</div>
-<div class="bg bottom">ZIRVE</div>
-<div class="scan"></div>
+<div class="big" id="top">ANKEB7T</div>
+<div class="big" id="bottom">ZIRVE</div>
+<div class="shine"></div>
 
 <div id="datetime"></div>
+
+<!-- OPEN -->
+<div id="openScreen">
+<button onclick="startBoot()">[ OPEN ]</button>
+</div>
 
 <!-- BOOT -->
 <div id="boot">
@@ -113,17 +154,17 @@ color:black;
 <h2 style="letter-spacing:10px;">ANKEB7T</h2>
 
 <div class="link" onclick="window.open('https://t.me/allesfurdie')">TELEGRAM</div>
-<div class="link" onclick="window.open('https://instagram.com/dxrbede')">INSTAGRAM</div>
+<div class="link" onclick="window.open('https://instagram.com/hissedilme')">INSTAGRAM</div>
 <div class="link" onclick="window.open('https://wa.me/998998780248')">WHATSAPP</div>
 
-<p style="margin-top:40px; letter-spacing:8px; opacity:.6;">
+<p style="margin-top:40px;letter-spacing:8px;opacity:.6;">
 ALLES FUR DIE
 </p>
 </div>
 </div>
 
 <script>
-/* TARİH GECİKMESİZ */
+/* Tarih anında */
 function updateTime(){
 const now=new Date();
 const d=now.toLocaleDateString("tr-TR");
@@ -133,11 +174,16 @@ document.getElementById("datetime").innerHTML=d+"<br>"+t;
 updateTime();
 setInterval(updateTime,1000);
 
-/* BOOT -> PANEL GEÇİŞ */
+/* OPEN -> BOOT -> PANEL */
+function startBoot(){
+document.getElementById("openScreen").style.display="none";
+document.getElementById("boot").style.display="block";
+
 setTimeout(()=>{
 document.getElementById("boot").style.display="none";
 document.getElementById("panel").style.display="flex";
 },3500);
+}
 </script>
 
 </body>
