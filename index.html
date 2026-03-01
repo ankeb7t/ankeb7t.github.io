@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANKEB7T الله </title>
+<title>ANKEB7T ALLAH</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,7 +18,15 @@ body{
     align-items:center;
     overflow:hidden;
     position:relative;
-    cursor:none; /* Mouse gizle */
+}
+
+/* KANVAS - KILIÇ TAKİP EFEKTİ */
+#canvas-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
 }
 
 /* SAĞ ÜST TARİH */
@@ -33,7 +41,7 @@ body{
     font-weight:bold;
 }
 
-/* SHINE */
+/* SHINE - PARLAMA EFEKTİ */
 .shine-text{
     background:linear-gradient(to right,#330000 20%,#ff0000 40%,#ffffff 50%,#ff0000 60%,#330000 80%);
     background-size:200% auto;
@@ -47,27 +55,20 @@ body{
     to{background-position:200% center;}
 }
 
-/* HEADER */
-.bg-header{
-    position:absolute;
-    top:15%;
-    font-size:clamp(35px,8vw,80px);
-    letter-spacing:10px;
-    z-index:5;
-    width:100%;
-    text-align:center;
-}
-.bg-footer{
-    position:absolute;
-    bottom:15%;
-    font-size:clamp(45px,10vw,100px);
-    letter-spacing:15px;
-    z-index:5;
-    width:100%;
-    text-align:center;
+/* HEADER & FOOTER */
+.bg-header{ position:absolute; top:15%; font-size:clamp(35px,8vw,80px); letter-spacing:10px; z-index:5; width:100%; text-align:center; }
+
+/* ALTTAKİ ARAPÇA YAZI STİLİ */
+.bg-footer{ 
+    position:absolute; 
+    bottom:15%; 
+    font-size:clamp(60px,12vw,120px); 
+    z-index:5; 
+    width:100%; 
+    text-align:center; 
+    font-family: 'Times New Roman', serif; /* Arapça hat için daha uygun */
 }
 
-/* OPEN */
 #open-btn{
     background:transparent;
     color:#ff0000;
@@ -79,13 +80,8 @@ body{
     z-index:100;
     transition:0.3s;
 }
-#open-btn:hover{
-    background:#ff0000;
-    color:#000;
-    box-shadow:0 0 20px red;
-}
+#open-btn:hover{ background:#ff0000; color:#000; box-shadow:0 0 20px red; }
 
-/* CONTENT */
 #main-content{
     display:none;
     flex-direction:column;
@@ -99,81 +95,16 @@ body{
     z-index:100;
     animation:fadeIn 0.3s ease;
 }
-@keyframes fadeIn{
-    from{opacity:0;transform:scale(0.95);}
-    to{opacity:1;transform:scale(1);}
-}
+@keyframes fadeIn{ from{opacity:0;transform:scale(0.95);} to{opacity:1;transform:scale(1);} }
 
-.inner-title{font-size:22px;letter-spacing:4px;margin-bottom:25px;}
-
-.links{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    width:100%;
-    margin-bottom:25px;
-}
-
-.btn{
-    border:1px solid #440000;
-    color:#ff0000;
-    padding:12px;
-    text-decoration:none;
-    text-align:center;
-    font-size:14px;
-    letter-spacing:2px;
-    transition:0.2s;
-}
-.btn:hover{
-    background:#ff0000;
-    color:#000;
-}
-
-.tagline{font-size:10px;letter-spacing:6px;opacity:0.8;}
-
-/* 📱 Mobile */
-@media(max-width:600px){
-    .bg-header{top:20%;}
-    .bg-footer{bottom:20%;}
-    #datetime{font-size:12px;top:10px;right:15px;}
-}
-
-/* 🔥 NEON CURSOR */
-.cursor{
-    position:fixed;
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    pointer-events:none;
-    background:linear-gradient(45deg,#ff0000,#ff00ff,#00ffff);
-    box-shadow:0 0 15px #ff0000,
-               0 0 30px #ff00ff,
-               0 0 45px #00ffff;
-    transform:translate(-50%,-50%);
-    z-index:9999;
-}
-
-/* Trail */
-.trail{
-    position:fixed;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    pointer-events:none;
-    background:red;
-    box-shadow:0 0 10px red,0 0 20px red;
-    animation:fade 0.6s linear forwards;
-}
-@keyframes fade{
-    to{
-        opacity:0;
-        transform:scale(0.5);
-    }
-}
+.links{ display:flex; flex-direction:column; gap:12px; width:100%; margin-bottom:25px; }
+.btn{ border:1px solid #440000; color:#ff0000; padding:12px; text-decoration:none; text-align:center; font-size:14px; letter-spacing:2px; transition:0.2s; }
+.btn:hover{ background:#ff0000; color:#000; }
 </style>
 </head>
-
 <body>
+
+<canvas id="canvas-trail"></canvas>
 
 <div id="datetime">
     <div id="date"></div>
@@ -181,21 +112,20 @@ body{
 </div>
 
 <div class="bg-header shine-text">ANKEB7T</div>
-<div class="bg-footer shine-text">ZİRVE</div>
+
+<div class="bg-footer shine-text">الله</div>
 
 <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
 
 <div id="main-content">
-    <div class="inner-title shine-text">ANKEB7T</div>
+    <div class="inner-title shine-text" style="font-size:22px; margin-bottom:25px;">ANKEB7T</div>
     <div class="links">
         <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
         <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
         <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
     </div>
-    <div class="tagline shine-text">ALLES FUR DIE</div>
+    <div class="tagline shine-text" style="font-size:10px; opacity:0.8;">ALLES FUR DIE</div>
 </div>
-
-<div class="cursor" id="cursor"></div>
 
 <script>
 function openSite(){
@@ -203,45 +133,62 @@ function openSite(){
     document.getElementById('main-content').style.display='flex';
 }
 
-/* Saat */
 function updateClock(){
     const now=new Date();
-    const d=String(now.getDate()).padStart(2,'0');
-    const m=String(now.getMonth()+1).padStart(2,'0');
-    const y=now.getFullYear();
-    const h=String(now.getHours()).padStart(2,'0');
-    const min=String(now.getMinutes()).padStart(2,'0');
-    const sec=String(now.getSeconds()).padStart(2,'0');
-    document.getElementById('date').textContent=d+"."+m+"."+y;
-    document.getElementById('time').textContent=h+":"+min+":"+sec;
+    document.getElementById('date').textContent=now.toLocaleDateString('tr-TR');
+    document.getElementById('time').textContent=now.toLocaleTimeString('tr-TR');
 }
-updateClock();
-setInterval(updateClock,1000);
+setInterval(updateClock,1000); updateClock();
 
-/* 🔥 Smooth Cursor */
-const cursor=document.getElementById("cursor");
-let mouseX=0,mouseY=0,posX=0,posY=0;
+/* --- KILIÇ TAKİP EFEKTİ --- */
+const canvas = document.getElementById('canvas-trail');
+const ctx = canvas.getContext('2d');
 
-document.addEventListener("mousemove",e=>{
-    mouseX=e.clientX;
-    mouseY=e.clientY;
+let points = [];
+const maxPoints = 18; 
 
-    const trail=document.createElement("div");
-    trail.className="trail";
-    trail.style.left=e.clientX+"px";
-    trail.style.top=e.clientY+"px";
-    document.body.appendChild(trail);
-    setTimeout(()=>trail.remove(),600);
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+window.addEventListener('mousemove', (e) => {
+    points.push({ x: e.clientX, y: e.clientY });
+    if (points.length > maxPoints) points.shift();
 });
 
-function animate(){
-    posX+=(mouseX-posX)*0.2;
-    posY+=(mouseY-posY)*0.2;
-    cursor.style.left=posX+"px";
-    cursor.style.top=posY+"px";
-    requestAnimationFrame(animate);
+function drawTrail() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    if (points.length < 2) {
+        requestAnimationFrame(drawTrail);
+        return;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+    }
+
+    ctx.strokeStyle = '#ff0000';
+    ctx.lineWidth = 3; 
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#ff0000';
+    ctx.stroke();
+
+    if (points.length > 0) {
+        points.shift(); 
+    }
+
+    requestAnimationFrame(drawTrail);
 }
-animate();
+drawTrail();
 </script>
 
 </body>
