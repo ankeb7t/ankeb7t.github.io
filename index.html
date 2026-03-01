@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANKEB7T ALLAH</title>
+<title>ANKEB7T - LİNK VE EFEKT GÜNCEL</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -20,7 +20,6 @@ body{
     position:relative;
 }
 
-/* KANVAS - KILIÇ TAKİP EFEKTİ */
 #canvas-trail {
     position: fixed;
     top: 0;
@@ -29,7 +28,6 @@ body{
     z-index: 9998;
 }
 
-/* SAĞ ÜST TARİH */
 #datetime{
     position:absolute;
     top:20px;
@@ -41,7 +39,6 @@ body{
     font-weight:bold;
 }
 
-/* SHINE - PARLAMA EFEKTİ */
 .shine-text{
     background:linear-gradient(to right,#330000 20%,#ff0000 40%,#ffffff 50%,#ff0000 60%,#330000 80%);
     background-size:200% auto;
@@ -55,18 +52,16 @@ body{
     to{background-position:200% center;}
 }
 
-/* HEADER & FOOTER */
 .bg-header{ position:absolute; top:15%; font-size:clamp(35px,8vw,80px); letter-spacing:10px; z-index:5; width:100%; text-align:center; }
 
-/* ALTTAKİ ARAPÇA YAZI STİLİ */
 .bg-footer{ 
     position:absolute; 
     bottom:15%; 
-    font-size:clamp(60px,12vw,120px); 
+    font-size:clamp(40px,10vw,100px); 
     z-index:5; 
     width:100%; 
     text-align:center; 
-    font-family: 'Times New Roman', serif; /* Arapça hat için daha uygun */
+    font-family: Arial, sans-serif;
 }
 
 #open-btn{
@@ -82,6 +77,7 @@ body{
 }
 #open-btn:hover{ background:#ff0000; color:#000; box-shadow:0 0 20px red; }
 
+/* LİNK PANELİ TASARIMI */
 #main-content{
     display:none;
     flex-direction:column;
@@ -112,8 +108,7 @@ body{
 </div>
 
 <div class="bg-header shine-text">ANKEB7T</div>
-
-<div class="bg-footer shine-text">الله</div>
+<div class="bg-footer shine-text">لا غالب إلا الله</div>
 
 <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
 
@@ -140,12 +135,11 @@ function updateClock(){
 }
 setInterval(updateClock,1000); updateClock();
 
-/* --- KILIÇ TAKİP EFEKTİ --- */
 const canvas = document.getElementById('canvas-trail');
 const ctx = canvas.getContext('2d');
 
 let points = [];
-const maxPoints = 18; 
+const maxPoints = 30; // Kılıç izini iyice uzattım
 
 function resize() {
     canvas.width = window.innerWidth;
@@ -161,18 +155,11 @@ window.addEventListener('mousemove', (e) => {
 
 function drawTrail() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    if (points.length < 2) {
-        requestAnimationFrame(drawTrail);
-        return;
-    }
+    if (points.length < 2) { requestAnimationFrame(drawTrail); return; }
 
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
-
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y);
-    }
+    for (let i = 1; i < points.length; i++) { ctx.lineTo(points[i].x, points[i].y); }
 
     ctx.strokeStyle = '#ff0000';
     ctx.lineWidth = 3; 
@@ -182,10 +169,7 @@ function drawTrail() {
     ctx.shadowColor = '#ff0000';
     ctx.stroke();
 
-    if (points.length > 0) {
-        points.shift(); 
-    }
-
+    if (points.length > 0) { points.shift(); }
     requestAnimationFrame(drawTrail);
 }
 drawTrail();
