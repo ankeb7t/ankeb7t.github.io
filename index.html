@@ -1,178 +1,248 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANKEB7T ZİRVE</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANKEB7T الله </title>
 
-        body {
-            background-color: #000;
-            color: #ff0000;
-            font-family: 'Courier New', Courier, monospace;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        /* SAĞ ÜST TARİH VE SAAT */
-        #datetime {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            text-align: right;
-            font-size: 14px;
-            letter-spacing: 2px;
-            z-index: 1000;
-            font-weight: bold;
-        }
+body{
+    background:#000;
+    color:#ff0000;
+    font-family:'Courier New',Courier,monospace;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+    cursor:none; /* Mouse gizle */
+}
 
-        /* SHINE EFEKTİ */
-        .shine-text {
-            background: linear-gradient(to right, #330000 20%, #ff0000 40%, #ffffff 50%, #ff0000 60%, #330000 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+/* SAĞ ÜST TARİH */
+#datetime{
+    position:absolute;
+    top:20px;
+    right:25px;
+    text-align:right;
+    font-size:14px;
+    letter-spacing:2px;
+    z-index:1000;
+    font-weight:bold;
+}
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+/* SHINE */
+.shine-text{
+    background:linear-gradient(to right,#330000 20%,#ff0000 40%,#ffffff 50%,#ff0000 60%,#330000 80%);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 3s linear infinite;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+@keyframes shine{
+    to{background-position:200% center;}
+}
 
-        /* ESNEK YAZI KONUMLARI (Responsive) */
-        .bg-header {
-            position: absolute;
-            top: 15%; /* Mobilde de tablette de sırıtmaz */
-            font-size: clamp(35px, 8vw, 80px);
-            letter-spacing: 10px;
-            z-index: 5;
-            width: 100%;
-            text-align: center;
-        }
+/* HEADER */
+.bg-header{
+    position:absolute;
+    top:15%;
+    font-size:clamp(35px,8vw,80px);
+    letter-spacing:10px;
+    z-index:5;
+    width:100%;
+    text-align:center;
+}
+.bg-footer{
+    position:absolute;
+    bottom:15%;
+    font-size:clamp(45px,10vw,100px);
+    letter-spacing:15px;
+    z-index:5;
+    width:100%;
+    text-align:center;
+}
 
-        .bg-footer {
-            position: absolute;
-            bottom: 15%;
-            font-size: clamp(45px, 10vw, 100px);
-            letter-spacing: 15px;
-            z-index: 5;
-            width: 100%;
-            text-align: center;
-        }
+/* OPEN */
+#open-btn{
+    background:transparent;
+    color:#ff0000;
+    border:1px solid #ff0000;
+    padding:15px 50px;
+    cursor:pointer;
+    font-size:18px;
+    letter-spacing:8px;
+    z-index:100;
+    transition:0.3s;
+}
+#open-btn:hover{
+    background:#ff0000;
+    color:#000;
+    box-shadow:0 0 20px red;
+}
 
-        /* SOSYAL MEDYA KUTUSU (Her ekrana göre genişlik ayarlı) */
-        #main-content {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            border: 1px solid #ff0000;
-            padding: 40px 20px;
-            width: 90%; /* Mobilde ekranı kaplar */
-            max-width: 400px; /* Tablette/PC'de sabitlenir */
-            background: #000;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
-            z-index: 100;
-            animation: fadeIn 0.3s ease;
-        }
+/* CONTENT */
+#main-content{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    border:1px solid #ff0000;
+    padding:40px 20px;
+    width:90%;
+    max-width:400px;
+    background:#000;
+    box-shadow:0 0 30px rgba(255,0,0,0.4);
+    z-index:100;
+    animation:fadeIn 0.3s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:scale(0.95);}
+    to{opacity:1;transform:scale(1);}
+}
 
-        /* OPEN BUTONU */
-        #open-btn {
-            background: transparent;
-            color: #ff0000;
-            border: 1px solid #ff0000;
-            padding: 15px 50px;
-            cursor: pointer;
-            font-size: 18px;
-            letter-spacing: 8px;
-            z-index: 100;
-            transition: 0.3s;
-        }
+.inner-title{font-size:22px;letter-spacing:4px;margin-bottom:25px;}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+.links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:100%;
+    margin-bottom:25px;
+}
 
-        .inner-title { font-size: 22px; letter-spacing: 4px; margin-bottom: 25px; }
+.btn{
+    border:1px solid #440000;
+    color:#ff0000;
+    padding:12px;
+    text-decoration:none;
+    text-align:center;
+    font-size:14px;
+    letter-spacing:2px;
+    transition:0.2s;
+}
+.btn:hover{
+    background:#ff0000;
+    color:#000;
+}
 
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            margin-bottom: 25px;
-        }
+.tagline{font-size:10px;letter-spacing:6px;opacity:0.8;}
 
-        .btn {
-            border: 1px solid #440000;
-            color: #ff0000;
-            padding: 12px;
-            text-decoration: none;
-            text-align: center;
-            font-size: 14px;
-            letter-spacing: 2px;
-            transition: 0.2s;
-        }
-        .btn:hover { background: #ff0000; color: #000; }
+/* 📱 Mobile */
+@media(max-width:600px){
+    .bg-header{top:20%;}
+    .bg-footer{bottom:20%;}
+    #datetime{font-size:12px;top:10px;right:15px;}
+}
 
-        .tagline { font-size: 10px; letter-spacing: 6px; opacity: 0.8; }
+/* 🔥 NEON CURSOR */
+.cursor{
+    position:fixed;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    pointer-events:none;
+    background:linear-gradient(45deg,#ff0000,#ff00ff,#00ffff);
+    box-shadow:0 0 15px #ff0000,
+               0 0 30px #ff00ff,
+               0 0 45px #00ffff;
+    transform:translate(-50%,-50%);
+    z-index:9999;
+}
 
-        /* TELEFONLAR İÇİN ÖZEL DOKUNUŞ */
-        @media (max-width: 600px) {
-            .bg-header { top: 20%; }
-            .bg-footer { bottom: 20%; }
-            #datetime { font-size: 12px; top: 10px; right: 15px; }
-        }
-    </style>
+/* Trail */
+.trail{
+    position:fixed;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    pointer-events:none;
+    background:red;
+    box-shadow:0 0 10px red,0 0 20px red;
+    animation:fade 0.6s linear forwards;
+}
+@keyframes fade{
+    to{
+        opacity:0;
+        transform:scale(0.5);
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div id="datetime">
-        <div id="date"></div>
-        <div id="time"></div>
+<div id="datetime">
+    <div id="date"></div>
+    <div id="time"></div>
+</div>
+
+<div class="bg-header shine-text">ANKEB7T</div>
+<div class="bg-footer shine-text">ZİRVE</div>
+
+<button id="open-btn" onclick="openSite()">[ OPEN ]</button>
+
+<div id="main-content">
+    <div class="inner-title shine-text">ANKEB7T</div>
+    <div class="links">
+        <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
+        <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
+        <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
     </div>
+    <div class="tagline shine-text">ALLES FUR DIE</div>
+</div>
 
-    <div class="bg-header shine-text">ANKEB7T</div>
-    <div class="bg-footer shine-text">ZİRVE</div>
+<div class="cursor" id="cursor"></div>
 
-    <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
+<script>
+function openSite(){
+    document.getElementById('open-btn').style.display='none';
+    document.getElementById('main-content').style.display='flex';
+}
 
-    <div id="main-content">
-        <div class="inner-title shine-text">ANKEB7T</div>
-        <div class="links">
-            <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
-            <a href="https://instagram.com/ankeb7t27" class="btn" target="_blank">INSTAGRAM</a>
-            <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
-        </div>
-        <div class="tagline shine-text">ALLES FUR DIE</div>
-    </div>
+/* Saat */
+function updateClock(){
+    const now=new Date();
+    const d=String(now.getDate()).padStart(2,'0');
+    const m=String(now.getMonth()+1).padStart(2,'0');
+    const y=now.getFullYear();
+    const h=String(now.getHours()).padStart(2,'0');
+    const min=String(now.getMinutes()).padStart(2,'0');
+    const sec=String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('date').textContent=d+"."+m+"."+y;
+    document.getElementById('time').textContent=h+":"+min+":"+sec;
+}
+updateClock();
+setInterval(updateClock,1000);
 
-    <script>
-        function openSite() {
-            document.getElementById('open-btn').style.display = 'none';
-            document.getElementById('main-content').style.display = 'flex';
-        }
+/* 🔥 Smooth Cursor */
+const cursor=document.getElementById("cursor");
+let mouseX=0,mouseY=0,posX=0,posY=0;
 
-        function updateClock() {
-            const now = new Date();
-            const d = String(now.getDate()).padStart(2, '0');
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const y = now.getFullYear();
-            const h = String(now.getHours()).padStart(2, '0');
-            const min = String(now.getMinutes()).padStart(2, '0');
-            const sec = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('date').textContent = d + "." + m + "." + y;
-            document.getElementById('time').textContent = h + ":" + min + ":" + sec;
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-    </script>
+document.addEventListener("mousemove",e=>{
+    mouseX=e.clientX;
+    mouseY=e.clientY;
+
+    const trail=document.createElement("div");
+    trail.className="trail";
+    trail.style.left=e.clientX+"px";
+    trail.style.top=e.clientY+"px";
+    document.body.appendChild(trail);
+    setTimeout(()=>trail.remove(),600);
+});
+
+function animate(){
+    posX+=(mouseX-posX)*0.2;
+    posY+=(mouseY-posY)*0.2;
+    cursor.style.left=posX+"px";
+    cursor.style.top=posY+"px";
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
 </body>
 </html>
