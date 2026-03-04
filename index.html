@@ -58,23 +58,30 @@ body{
 .bg-header-sword{ position:absolute; top:12%; z-index:5; width:100%; text-align:center; }
 .bg-footer{ position:absolute; bottom:15%; font-size:clamp(40px,10vw,100px); z-index:5; width:100%; text-align:center; font-family: Arial, sans-serif; text-transform:uppercase; font-weight:bold;}
 
-/* CSS ZÜLFİKAR SİMGESİ YAPISI */
+/* CSS ZÜLFİKAR SİMGESİ YAPISI (SVG Kılıç) */
 .zulfikar-icon {
-    font-family: Arial, sans-serif; /* Simge karakterleri için */
     font-style: normal;
     user-select: none;
     display: inline-block;
     vertical-align: middle;
+    width: clamp(100px, 20vw, 200px); /* Kılıcın genişliği ayarlanabilir */
+    height: auto;
 }
 
-/* Büyük Arka Plan Kılıcı Boyutu */
-.bg-header-sword .zulfikar-icon {
-    font-size: clamp(60px, 15vw, 150px);
+/* SVG kılıç rengi ve parlama efekti ayarları */
+.zulfikar-icon svg path {
+    fill: #ff0000; /* Kırmızı renk */
+    filter: url(#glow); /* Parlama filtresi */
 }
+
+/* Büyük Arka Plan Kılıcı Boyutu (Gerekirse) */
+/*.bg-header-sword .zulfikar-icon {
+    width: clamp(150px, 30vw, 300px);
+}*/
 
 /* Panel İçi Küçük Kılıç Boyutu */
 .inner-title .zulfikar-icon {
-    font-size: 40px;
+    width: 60px;
 }
 
 #open-btn{
@@ -119,8 +126,24 @@ body{
     <div id="time"></div>
 </div>
 
+<svg style="position: absolute; width: 0; height: 0;">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+</svg>
+
 <div class="bg-header-sword">
-    <span class="zulfikar-icon shine-effect">&#x2694;</span>
+    <span class="zulfikar-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 5 L55 15 L45 15 Z M50 15 V85 M30 35 H70 M30 35 C30 50 40 60 50 60 C60 60 70 50 70 35"/>
+        </svg>
+    </span>
 </div>
 
 <div class="bg-footer shine-effect">لا غالب إلا الله</div>
@@ -129,7 +152,11 @@ body{
 
 <div id="main-content">
     <div class="inner-title" style="margin-bottom:25px; text-align:center;">
-        <span class="zulfikar-icon shine-effect">&#x2694;</span>
+        <span class="zulfikar-icon">
+             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L55 15 L45 15 Z M50 15 V85 M30 35 H70 M30 35 C30 50 40 60 50 60 C60 60 70 50 70 35"/>
+            </svg>
+        </span>
     </div>
     
     <div class="links">
