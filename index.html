@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANKEB7T - LA GALİBE İLLAALLAH</title>
+<title>ZÜLFİKAR - LA GALİBE İLLAALLAH</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -41,21 +41,41 @@ body{
     font-weight:bold;
 }
 
-.shine-text{
+/* PARLAMA EFEKTİ (Metin ve Simgeler İçin) */
+.shine-effect{
     background:linear-gradient(to right,#330000 20%,#ff0000 40%,#ffffff 50%,#ff0000 60%,#330000 80%);
     background-size:200% auto;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    display: inline-block; /* Simge hizalaması için */
     animation:shine 3s linear infinite;
-    font-weight:bold;
-    text-transform:uppercase;
 }
 @keyframes shine{
     to{background-position:200% center;}
 }
 
-.bg-header{ position:absolute; top:15%; font-size:clamp(35px,8vw,80px); letter-spacing:10px; z-index:5; width:100%; text-align:center; }
-.bg-footer{ position:absolute; bottom:15%; font-size:clamp(40px,10vw,100px); z-index:5; width:100%; text-align:center; font-family: Arial, sans-serif; }
+/* Arka Plan Kılıç Konumu */
+.bg-header-sword{ position:absolute; top:12%; z-index:5; width:100%; text-align:center; }
+.bg-footer{ position:absolute; bottom:15%; font-size:clamp(40px,10vw,100px); z-index:5; width:100%; text-align:center; font-family: Arial, sans-serif; text-transform:uppercase; font-weight:bold;}
+
+/* CSS ZÜLFİKAR SİMGESİ YAPISI */
+.zulfikar-icon {
+    font-family: Arial, sans-serif; /* Simge karakterleri için */
+    font-style: normal;
+    user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Büyük Arka Plan Kılıcı Boyutu */
+.bg-header-sword .zulfikar-icon {
+    font-size: clamp(60px, 15vw, 150px);
+}
+
+/* Panel İçi Küçük Kılıç Boyutu */
+.inner-title .zulfikar-icon {
+    font-size: 40px;
+}
 
 #open-btn{
     background:transparent;
@@ -99,19 +119,25 @@ body{
     <div id="time"></div>
 </div>
 
-<div class="bg-header shine-text">ANKEB7T</div>
-<div class="bg-footer shine-text">لا غالب إلا الله</div>
+<div class="bg-header-sword">
+    <span class="zulfikar-icon shine-effect">&#x2694;</span>
+</div>
+
+<div class="bg-footer shine-effect">لا غالب إلا الله</div>
 
 <button id="open-btn" onclick="openSite()">[ OPEN ]</button>
 
 <div id="main-content">
-    <div class="inner-title shine-text" style="font-size:22px; margin-bottom:25px;">ANKEB7T</div>
+    <div class="inner-title" style="margin-bottom:25px; text-align:center;">
+        <span class="zulfikar-icon shine-effect">&#x2694;</span>
+    </div>
+    
     <div class="links">
         <a href="https://t.me/allesfurdie" class="btn" target="_blank">TELEGRAM</a>
         <a href="https://instagram.com/dxrbede" class="btn" target="_blank">INSTAGRAM</a>
         <a href="https://wa.me/998998780248" class="btn" target="_blank">WHATSAPP</a>
     </div>
-    <div class="tagline shine-text" style="font-size:10px; opacity:0.8;">ALLES FUR DIE</div>
+    <div class="tagline shine-effect" style="font-size:10px; opacity:0.8;">ALLES FUR DIE</div>
 </div>
 
 <script>
